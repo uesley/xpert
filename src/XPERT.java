@@ -1,9 +1,12 @@
+
 import model.etapa.Etapa;
+
 
 public class XPERT {
 
 	public static void main(String[] args) {
-            testeInsertEtapa("Novo Nome", "uma descricao qualquer", 12);
+
+           // testeInsertEtapa("Novo Nome", "uma descricao qualquer", 12);
             testeListEtapas();
 //            testeFindEtapa();
 //            testeEditEtapa();
@@ -41,5 +44,6 @@ public class XPERT {
             System.out.println("id : " + etapa.getId());
             System.out.println("nome : " + etapa.getNome());
         }
+
 
 }

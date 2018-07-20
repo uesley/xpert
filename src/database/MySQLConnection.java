@@ -1,15 +1,13 @@
 package database;
 
-import java.sql.Array;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 
-public class DBConnectionMySQL implements DBConnection {
+public class MySQLConnection implements DBConnection {
 
     private String lastQuery;
     private Connection conexao;
@@ -21,7 +19,7 @@ public class DBConnectionMySQL implements DBConnection {
     private String DRIVER = "com.mysql.cj.jdbc.Driver";
     private String URL = "jdbc:mysql://" + HOST + "/" + BASE;
 
-    public DBConnectionMySQL() {
+    public MySQLConnection() {
 
         try {
             Class.forName(DRIVER);

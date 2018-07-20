@@ -3,14 +3,14 @@ package model.etapa;
 import java.util.ArrayList;
 
 import database.DBConnection;
-import database.DBConnectionMySQL;
+import database.MySQLConnection;
 import java.util.Iterator;
 import model.IDAO;
 
 public class EtapaDAO implements IDAO<Etapa> {
 
     protected String table = "etapas";
-    private DBConnection database = new DBConnectionMySQL();
+    private DBConnection database = new MySQLConnection();
     private Etapa etapa;
 
     public EtapaDAO(Etapa e) {
