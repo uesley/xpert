@@ -3,13 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/uesleymelo/NetBeansProjects/XPERT/src/database/MySQLConnection.java</file>
-            <file>file:/home/uesleymelo/NetBeansProjects/XPERT/src/xpert/XPERT.java</file>
-            <file>file:/home/uesleymelo/NetBeansProjects/XPERT/src/model/IDAO.java</file>
-            <file>file:/home/uesleymelo/NetBeansProjects/XPERT/src/model/etapa/EtapaDAO.java</file>
-            <file>file:/home/uesleymelo/NetBeansProjects/XPERT/src/model/etapa/IEtapa.java</file>
-            <file>file:/home/uesleymelo/NetBeansProjects/XPERT/src/model/etapa/Etapa.java</file>
-            <file>file:/home/uesleymelo/NetBeansProjects/XPERT/src/database/DBConnection.java</file>
+            <file>file:/home/uesleymelo/xpert/xpert/src/XPERT.java</file>
+            <file>file:/home/uesleymelo/xpert/xpert/src/database/DBConnection.java</file>
+            <file>file:/home/uesleymelo/xpert/xpert/src/database/MySQLConnection.java</file>
+            <file>file:/home/uesleymelo/xpert/xpert/src/model/etapa/EtapaDAO.java</file>
         </group>
     </open-files>
 </project-private>
