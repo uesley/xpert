@@ -1,19 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view;
 
-/**
- *
- * @author UNIVASF
- */
+import javax.swing.table.DefaultTableModel;
+
 public class FormInserirProjeto extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FormInserirProjeto
-     */
+    private int count = 1;
     public FormInserirProjeto() {
         initComponents();
     }
@@ -27,73 +18,211 @@ public class FormInserirProjeto extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        painelProjeto = new javax.swing.JPanel();
         lblProjeto = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jPanel2 = new javax.swing.JPanel();
+        txtProjeto = new javax.swing.JTextField();
+        painelAcoes = new javax.swing.JPanel();
         btnSalvar = new javax.swing.JButton();
         btnSimular = new javax.swing.JButton();
         btnFechar = new javax.swing.JButton();
+        painelEtapa = new javax.swing.JPanel();
+        lblEtapa = new javax.swing.JLabel();
+        txtEtapa = new javax.swing.JTextField();
+        lblDuracao = new javax.swing.JLabel();
+        txtDuracao = new javax.swing.JTextField();
+        lblDependencia = new javax.swing.JLabel();
+        txtDependencias = new javax.swing.JTextField();
+        btnInserir = new javax.swing.JButton();
+        painelTabela = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTProjeto = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Inserir Projeto");
-        setPreferredSize(new java.awt.Dimension(800, 600));
+        setPreferredSize(new java.awt.Dimension(1000, 700));
 
+        lblProjeto.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblProjeto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblProjeto.setText("Projeto");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(lblProjeto)
-                .addGap(18, 18, 18)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        txtProjeto.setMinimumSize(new java.awt.Dimension(6, 10));
+        txtProjeto.setPreferredSize(new java.awt.Dimension(12, 30));
+        txtProjeto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtProjetoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout painelProjetoLayout = new javax.swing.GroupLayout(painelProjeto);
+        painelProjeto.setLayout(painelProjetoLayout);
+        painelProjetoLayout.setHorizontalGroup(
+            painelProjetoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelProjetoLayout.createSequentialGroup()
+                .addComponent(lblProjeto, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtProjeto, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblProjeto)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        painelProjetoLayout.setVerticalGroup(
+            painelProjetoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblProjeto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(txtProjeto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        jPanel2.setLayout(new java.awt.BorderLayout());
+        painelAcoes.setLayout(new java.awt.GridLayout(1, 0));
 
         btnSalvar.setText("Salvar");
-        jPanel2.add(btnSalvar, java.awt.BorderLayout.CENTER);
+        painelAcoes.add(btnSalvar);
 
         btnSimular.setText("Simular");
-        jPanel2.add(btnSimular, java.awt.BorderLayout.PAGE_START);
+        painelAcoes.add(btnSimular);
 
         btnFechar.setText("Fechar");
-        jPanel2.add(btnFechar, java.awt.BorderLayout.PAGE_END);
+        btnFechar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFecharActionPerformed(evt);
+            }
+        });
+        painelAcoes.add(btnFechar);
+
+        painelEtapa.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        painelEtapa.setLayout(new java.awt.GridLayout(1, 0));
+
+        lblEtapa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblEtapa.setText("Etapa");
+        painelEtapa.add(lblEtapa);
+        painelEtapa.add(txtEtapa);
+
+        lblDuracao.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblDuracao.setText("Duração");
+        painelEtapa.add(lblDuracao);
+
+        txtDuracao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDuracaoActionPerformed(evt);
+            }
+        });
+        painelEtapa.add(txtDuracao);
+
+        lblDependencia.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblDependencia.setText("Dependências");
+        painelEtapa.add(lblDependencia);
+
+        txtDependencias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDependenciasActionPerformed(evt);
+            }
+        });
+        painelEtapa.add(txtDependencias);
+
+        btnInserir.setText("Inserir Etapa");
+        btnInserir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInserirActionPerformed(evt);
+            }
+        });
+        painelEtapa.add(btnInserir);
+
+        jTProjeto.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "N°", "Etapa", "Duração", "Dependências"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, true, true, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTProjeto);
+        if (jTProjeto.getColumnModel().getColumnCount() > 0) {
+            jTProjeto.getColumnModel().getColumn(0).setResizable(false);
+            jTProjeto.getColumnModel().getColumn(0).setPreferredWidth(1);
+            jTProjeto.getColumnModel().getColumn(1).setResizable(false);
+            jTProjeto.getColumnModel().getColumn(2).setResizable(false);
+            jTProjeto.getColumnModel().getColumn(3).setResizable(false);
+        }
+
+        javax.swing.GroupLayout painelTabelaLayout = new javax.swing.GroupLayout(painelTabela);
+        painelTabela.setLayout(painelTabelaLayout);
+        painelTabelaLayout.setHorizontalGroup(
+            painelTabelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1)
+        );
+        painelTabelaLayout.setVerticalGroup(
+            painelTabelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(painelTabela, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(painelAcoes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(painelEtapa, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 980, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(painelProjeto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 178, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(painelProjeto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16)
+                .addComponent(painelEtapa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(painelTabela, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(painelAcoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
+        painelEtapa.getAccessibleContext().setAccessibleName("Adicionar Etapa");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnFecharActionPerformed
+
+    private void txtProjetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProjetoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtProjetoActionPerformed
+
+    private void btnInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserirActionPerformed
+        DefaultTableModel dtmEtapas = (DefaultTableModel) jTProjeto.getModel();
+        Object[] dados = {count, txtEtapa.getText(), txtDuracao.getText(), txtDependencias.getText()};
+        dtmEtapas.addRow(dados);
+        //jTProjeto.
+        count++;
+    }//GEN-LAST:event_btnInserirActionPerformed
+
+    private void txtDependenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDependenciasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDependenciasActionPerformed
+
+    private void txtDuracaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDuracaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDuracaoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -126,21 +255,31 @@ public class FormInserirProjeto extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 //new FormInserirProjeto().setVisible(true);
-
-//                FormInserirProjeto  form = new FormPrincipal();
-
-                
+                FormInserirProjeto  form = new FormInserirProjeto();
+                form.setLocationRelativeTo(null);
+                form.setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFechar;
+    private javax.swing.JButton btnInserir;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JButton btnSimular;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTProjeto;
+    private javax.swing.JLabel lblDependencia;
+    private javax.swing.JLabel lblDuracao;
+    private javax.swing.JLabel lblEtapa;
     private javax.swing.JLabel lblProjeto;
+    private javax.swing.JPanel painelAcoes;
+    private javax.swing.JPanel painelEtapa;
+    private javax.swing.JPanel painelProjeto;
+    private javax.swing.JPanel painelTabela;
+    private javax.swing.JTextField txtDependencias;
+    private javax.swing.JTextField txtDuracao;
+    private javax.swing.JTextField txtEtapa;
+    private javax.swing.JTextField txtProjeto;
     // End of variables declaration//GEN-END:variables
 }
