@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.lang.String;
 
 public class Etapa {
-	private int identificacao;
+	private int id;
 	private String nome;
 	private int tempoDeDuracaoPrevista;
 	private int tempoDeDuracaoReal;
@@ -24,11 +24,11 @@ public class Etapa {
 	}
 
 	public int getIdentificacao() {
-		return identificacao;
+		return id;
 	}
 
 	public void setIdentificacao(int identificacao) {
-		this.identificacao = identificacao;
+		this.id = identificacao;
 	}
 
 	public String getNome() {
