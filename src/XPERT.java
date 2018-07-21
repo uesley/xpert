@@ -44,6 +44,10 @@ public class XPERT {
             System.out.println("id : " + etapa.getId());
             System.out.println("nome : " + etapa.getNome());
         }
+        
+        public static void testeInsertProjeto(){
+            
+        }
 
 
 }
