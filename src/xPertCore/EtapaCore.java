@@ -151,7 +151,15 @@ public class EtapaCore {
         public Etapa convert()
         {
             Etapa targetEtapa = new Etapa();
-            targetEtapa.setDescricao(nome);
+            targetEtapa.setDescricao(getDescricao());
+            targetEtapa.setDisponibilidade(isDisponivel());
+            targetEtapa.setDuracao_prevista(getTempoDeDuracaoPrevista());
+            targetEtapa.setDuracao_real(getTempoDeDuracaoReal());
+            targetEtapa.setFolga(getMaiorTempoDeFolga());
+            targetEtapa.setId(getIdentificacao());
+            targetEtapa.setMenorTempoFim(getMenorTempoDeFim());
+            targetEtapa.setMenorTempoInicio(getMenorTempoDeIncio());
+            targetEtapa.setNome(getNome());
             
             return targetEtapa;
         }
