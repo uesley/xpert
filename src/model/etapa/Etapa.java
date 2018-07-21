@@ -3,6 +3,7 @@ package model.etapa;
 import java.util.ArrayList;
 
 import model.IDAO;
+import xPertCore.EtapaCore;
 
 public class Etapa implements IEtapa, IDAO<Etapa> {
 
@@ -14,6 +15,7 @@ public class Etapa implements IEtapa, IDAO<Etapa> {
     private short disponibilidade;
     private short realizado;
     private int projeto;
+    private int folga;
     private int menor_tempo_inicio;
     private int menor_tempo_fim;
     private EtapaDAO dao;
@@ -22,6 +24,14 @@ public class Etapa implements IEtapa, IDAO<Etapa> {
         dao = new EtapaDAO(this);
     }
 
+    public int getFolga() {
+        return folga;
+    }
+
+    public void setFolga(int folga) {
+        this.folga = folga;
+    }
+    
     @Override
     public int getId() {
         return id;
@@ -150,25 +160,38 @@ public class Etapa implements IEtapa, IDAO<Etapa> {
 
     @Override
     public void addDependencia(Etapa dependencia) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        dao.adicionarDependencias(dependencia.getId());
     }
 
     @Override
     public void addDependencia(int id_dependencia) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        dao.adicionarDependencias(id_dependencia);
     }
 
     @Override
     public void removeDependencia(Etapa dependencia) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        dao.removeDependencia(dependencia.getId());
     }
 
     @Override
     public void removeDependencia(int id_dependencia) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        dao.removeDependencia(id_dependencia);
     }
-    
-    
-    
 
+    @Override
+    public ArrayList<Etapa> getDependencias() {
+        return dao.getDependencias();
+    }
+
+    @Override
+    public int[] getDependenciasIDs() {
+        return dao.getDependenciasID();
+    }
+    public EtapaCore convert()
+    {
+        EtapaCore target = new EtapaCoreore(getId(),getNome(),getDuracao_prevista(),getDescricao(), getDuracao_real(), getRealizado(), getMenorTempoInicio(), getMenorTempoFim(), getFolga(),null);
+        return target;
+    }
 }
+
+

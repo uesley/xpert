@@ -48,6 +48,7 @@ public class EtapaDAO implements IDAO<Etapa> {
         fields.add("duracao_real");
         fields.add("disponibilidade");
         fields.add("realizado");
+        fields.add("projeto");
         
         ArrayList<String> values = new ArrayList<>();
         values.add(etapa.getNome());
@@ -56,6 +57,7 @@ public class EtapaDAO implements IDAO<Etapa> {
         values.add(Integer.toString(etapa.getDuracao_real()));
         values.add(Integer.toString(etapa.getDisponibilidade()?1:0));
         values.add(Integer.toString(etapa.getRealizado()?1:0));
+        values.add(Integer.toString(etapa.getProjeto()));
         database.update( 
                 table,
                 etapa.getId(),
@@ -73,28 +75,63 @@ public class EtapaDAO implements IDAO<Etapa> {
         
         ArrayList<String> result = database.find(table, id);
         try{
-            etapa.setId(Integer.parseInt(result.get(0)));
-            etapa.setNome(result.get(1));
-            etapa.setDescricao(result.get(2));
-            etapa.setDuracao_prevista(Integer.parseInt(result.get(3)));
-            etapa.setDisponibilidade(Integer.parseInt(result.get(4)) != 0);
-            etapa.setRealizado(Integer.parseInt(result.get(5))!= 0);
-            etapa.setDuracao_real(Integer.parseInt(result.get(6)));
-            etapa.setProjeto(Integer.parseInt(result.get(7)));
-            return etapa;
+            mapToEtapa(etapa,result);
         }catch(NullPointerException ex){
-            return new Etapa();
+            etapa = new Etapa();
         }
+        return etapa;
     }
 
     @Override
     public ArrayList<Etapa> get() {
         ArrayList<Etapa> etapas = new ArrayList<>();
         ArrayList<ArrayList<String>> result = database.get(table);
-        
         Iterator<ArrayList<String>> linha_i = result.iterator();
         while(linha_i.hasNext()){
             ArrayList<String> linha = linha_i.next();
+            etapas.add(mapToEtapa(linha));
+        }
+        return etapas;
+    }
+    
+    public ArrayList<Etapa> getByProject(int idProjeto){
+        ArrayList<Etapa> etapas = new ArrayList<>();
+        String select = "SELECT * FROM `"+table+"` "
+                + " where projeto="+idProjeto;
+        ArrayList<ArrayList<String>> result = database.query(select);
+        Iterator<ArrayList<String>> linha_i = result.iterator();
+        while(linha_i.hasNext()){
+            ArrayList<String> linha = linha_i.next();
+            etapas.add(mapToEtapa(linha));
+        }
+        return etapas;
+    }
+
+    public void adicionarDependencias(int dependencia){
+        String[] fields = {"dependente","dependencia"};
+        String[] values = {Integer.toString(etapa.getId()), Integer.toString(dependencia)};
+        database.insert("dependencias", fields, values);
+    }
+    
+    public void removeDependencia(int dependencia){
+        String delete = "DELETE FROM dependencias "
+                + "WHERE dependencia=" + dependencia+" and "
+                + "dependente="+etapa.getId();
+        database.command(delete);
+    }
+    
+    private void mapToEtapa(Etapa e, ArrayList<String> linha){
+            etapa.setId(Integer.parseInt(linha.get(0)));
+            etapa.setNome(linha.get(1));
+            etapa.setDescricao(linha.get(2));
+            etapa.setDuracao_prevista(Integer.parseInt(linha.get(3)));
+            etapa.setDisponibilidade(Integer.parseInt(linha.get(4)) != 0);
+            etapa.setRealizado(Integer.parseInt(linha.get(5)) != 0);
+            etapa.setDuracao_real(Integer.parseInt(linha.get(6)));
+            etapa.setProjeto(Integer.parseInt(linha.get(7)));
+    }
+    
+    private Etapa mapToEtapa(ArrayList<String> linha){
             Etapa etapa = new Etapa();
             etapa.setId(Integer.parseInt(linha.get(0)));
             etapa.setNome(linha.get(1));
@@ -104,9 +141,33 @@ public class EtapaDAO implements IDAO<Etapa> {
             etapa.setRealizado(Integer.parseInt(linha.get(5)) != 0);
             etapa.setDuracao_real(Integer.parseInt(linha.get(6)));
             etapa.setProjeto(Integer.parseInt(linha.get(7)));
-            etapas.add(etapa);
+            return etapa;
+    }
+    
+    public ArrayList<Etapa> getDependencias(){
+        ArrayList<Etapa> etapas = new ArrayList<>();
+        String select = "SELECT "
+                + "id,nome,descricao, duracao_prevista,disponibilidade,realizado,duracao_real,projeto"
+                + " FROM dependencias inner join etapas on (dependencia = id)"
+                + " where dependente="+etapa.getId();
+        ArrayList<ArrayList<String>> result = database.query(select);
+        Iterator<ArrayList<String>> linha_i = result.iterator();
+        while(linha_i.hasNext()){
+            ArrayList<String> linha = linha_i.next();
+            etapas.add(mapToEtapa(linha));
         }
         return etapas;
     }
-
+    
+    public int[] getDependenciasID(){
+        String select = "SELECT dependencia as id FROM dependencias where dependente="+etapa.getId();
+        ArrayList<ArrayList<String>> resultBD = database.query(select);
+        int result[] = new int[resultBD.size()];
+        int i=0;
+        for(ArrayList<String> row : resultBD)
+            result[i++] = (Integer.parseInt(row.get(0)));
+        return result;
+    }
+    
+    
 }

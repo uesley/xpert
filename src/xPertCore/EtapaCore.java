@@ -2,9 +2,10 @@ package xPertCore;
 
 import java.util.ArrayList;
 import java.lang.String;
+import model.etapa.Etapa;
 
-public class Etapa {
-	private int identificacao;
+public class EtapaCore {
+	private int id;
 	private String nome;
 	private int tempoDeDuracaoPrevista;
 	private int tempoDeDuracaoReal;
@@ -12,9 +13,18 @@ public class Etapa {
 	private int menorTempoDeIncio;
 	private int menorTempoDeFim;
 	private int maiorTempoDeFolga;
-	private ArrayList<Etapa> listaDeDependencias = new ArrayList<Etapa>(0);
+        private String descricao;
+
+        public String getDescricao() {
+            return descricao;
+        }
+
+        public void setDescricao(String descricao) {
+            this.descricao = descricao;
+        }
+	private ArrayList<EtapaCore> listaDeDependencias = new ArrayList<EtapaCore>(0);
 	
-	public Etapa(int idEtapa,String nomeEtapa,int ETA,ArrayList<Etapa> listaDeDependencias)
+	public EtapaCore(int idEtapa,String nomeEtapa,int ETA,ArrayList<EtapaCore> listaDeDependencias)
 	{
 		setIdentificacao(idEtapa);
 		setNome(nomeEtapa);
@@ -22,13 +32,27 @@ public class Etapa {
 		setRealizado(false);
 		this.listaDeDependencias = listaDeDependencias;
 	}
+        public EtapaCore(int idEtapa,String nomeEtapa,int ETA,String descricao,int tempoDeDuracaoReal,boolean realizado,int menorTempoDeInicio,int menorTempoDeFim,int maiorTempoDeFolga,ArrayList<EtapaCore> listaDeDependencias)
+	{
+		setIdentificacao(idEtapa);
+		setNome(nomeEtapa);
+		setTempoDeDuracaoPrevista(ETA);
+		setRealizado(false);
+                setDescricao(descricao);
+                setTempoDeDuracaoReal(tempoDeDuracaoReal);
+                setRealizado(realizado);
+                setMenorTempoDeIncio(menorTempoDeIncio);
+                setMenorTempoDeFim(menorTempoDeFim);
+                setMaiorTempoDeFolga(maiorTempoDeFolga);
+		this.listaDeDependencias = listaDeDependencias;
+	}
 
 	public int getIdentificacao() {
-		return identificacao;
+		return id;
 	}
 
 	public void setIdentificacao(int identificacao) {
-		this.identificacao = identificacao;
+		this.id = identificacao;
 	}
 
 	public String getNome() {
@@ -87,11 +111,11 @@ public class Etapa {
 		this.maiorTempoDeFolga = maiorTempoDeFolga;
 	}
 
-	public ArrayList<Etapa> getListaDeDependencias() {
+	public ArrayList<EtapaCore> getListaDeDependencias() {
 		return listaDeDependencias;
 	}
 
-	public void setListaDeDependencias(ArrayList<Etapa> listaDeDependencias) {
+	public void setListaDeDependencias(ArrayList<EtapaCore> listaDeDependencias) {
 		this.listaDeDependencias = listaDeDependencias;
 	}
     public boolean isDisponivel()
@@ -124,6 +148,13 @@ public class Etapa {
 		setRealizado(true);
 		
 	}
+        public Etapa convert()
+        {
+            Etapa targetEtapa = new Etapa();
+            targetEtapa.setDescricao(nome);
+            
+            return targetEtapa;
+        }
 	
 	
 	

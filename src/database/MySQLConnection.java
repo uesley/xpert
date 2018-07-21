@@ -47,8 +47,8 @@ public class MySQLConnection implements DBConnection {
         String f = "`" + String.join("`,`", fields) + "`";
         String v = "'" + String.join("','", values) + "'";
         String query = "INSERT INTO `" + table + "` (" + f + ") values(" + v + ")";
-        System.out.println("usando banco: mysql, inserindo em : " + table);
-        System.out.println("Query: " + query);
+//        System.out.println("usando banco: mysql, inserindo em : " + table);
+//        System.out.println("Query: " + query);
 		command(query);
     }
 

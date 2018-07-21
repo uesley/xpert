@@ -2,22 +2,20 @@ package xPertCore;
 
 import java.util.ArrayList;
 import java.lang.String;
-//vai pfvr!!
 
-
-public class Projeto {
-	private int identificacao;
+public class ProjetoCore {
+	private int id;
 	private String nome;
 	private double situacao;
 	private int ETA;
         private int atraso;
-	private ArrayList<Etapa> etapasVinculadas = new ArrayList<Etapa>(0);
+	private ArrayList<EtapaCore> etapasVinculadas = new ArrayList<EtapaCore>(0);
 	
-	public Projeto(ArrayList<Etapa> etapasNecessarias,int idProjeto,String nomeProjeto)
+	public ProjetoCore(ArrayList<EtapaCore> etapasNecessarias,int idProjeto,String nomeProjeto)
 	{
 		etapasVinculadas = etapasNecessarias;
 		setIdentificacao(idProjeto);
-		setNome(nomeProjeto);
+		setNome(nomeProjeto);   
 		setETA(-1);
 	}
 	public String getNome()
@@ -30,27 +28,44 @@ public class Projeto {
 	}
 	public int getIdentificacao()
 	{
-		return identificacao;
+		return id;
 	}
 	public void setIdentificacao(int idProjeto)
 	{	if(idProjeto >= 0)
-			identificacao = idProjeto;
+			id = idProjeto;
 		else
 			System.out.println("Id invalido");
 	}
 	public double getSituacao()
 	{
-		return situacao;
-	}
-	public void setSituacao(double p)
-	{	if(p>=0)
-			situacao = p;
-		else
-			System.out.println("Percentual invalido");
+            int n=etapasVinculadas.size();
+            int tempoRealizado=0,tempoTotal=0;
+            for(int c=0;c<n;c++)
+            {
+                if(etapasVinculadas.get(c).isRealizado())
+                    tempoRealizado+=etapasVinculadas.get(c).getTempoDeDuracaoPrevista();
+	
+                tempoTotal+=etapasVinculadas.get(c).getTempoDeDuracaoPrevista();
+            }
+            
+            return (double) tempoRealizado/tempoTotal;
 	}
         public int getAtraso() 
         {
-            return atraso;
+            int n=etapasVinculadas.size();
+            int tempoAtrasado=0;
+            for(int c=0;c<n;c++)
+            { 
+                if(etapasVinculadas.get(c).isRealizado())
+                {  
+                    int aux=(etapasVinculadas.get(c).getTempoDeDuracaoReal()-etapasVinculadas.get(c).getTempoDeDuracaoPrevista()-etapasVinculadas.get(c).getMaiorTempoDeFolga());
+                    
+                    if(aux>0)
+                        tempoAtrasado+=aux;
+                }
+            }
+            setAtraso(tempoAtrasado);
+            return  tempoAtrasado;
         }
         public void setAtraso(int atraso)
         {
@@ -62,10 +77,22 @@ public class Projeto {
 	public void setETA(int eTA) {
 		ETA = eTA;
 	}
-	public ArrayList<Etapa> getEtapasDisponiveis()
+        public EtapaCore getEtapa(int idEtapa)
+        {
+            int n=etapasVinculadas.size();
+            for(int c=0;c<n;c++)
+            {
+                if(etapasVinculadas.get(c).getIdentificacao() == idEtapa)
+                    return etapasVinculadas.get(c);
+            }
+            
+            System.out.println("Etapa não vinculada ao projeto");
+            return null;
+        }
+	public ArrayList<EtapaCore> getEtapasDisponiveis()
 	{
 		int n=etapasVinculadas.size();
-		ArrayList<Etapa> etapasDisponiveis = new ArrayList<Etapa>(0);
+		ArrayList<EtapaCore> etapasDisponiveis = new ArrayList<EtapaCore>(0);
 		
 		for(int c=0;c<n;c++)
 		{
@@ -78,10 +105,10 @@ public class Projeto {
 		return etapasDisponiveis;
 		
 	}
-	public ArrayList<Etapa> getEtapasConcluidas()
+	public ArrayList<EtapaCore> getEtapasConcluidas()
 	{
 		int n=etapasVinculadas.size();
-		ArrayList<Etapa> etapasConculuidas = new ArrayList<Etapa>(0);
+		ArrayList<EtapaCore> etapasConculuidas = new ArrayList<EtapaCore>(0);
 		
 		for(int c=0;c<n;c++)
 		{
@@ -102,7 +129,7 @@ public class Projeto {
 		if(getETA()==-1)
 		{
 			int time =0;
-			ArrayList<Etapa> abertos = new ArrayList<Etapa>(0);
+			ArrayList<EtapaCore> abertos = new ArrayList<EtapaCore>(0);
 			
 			while(getEtapasAFazer() > 0)
 			{
@@ -139,6 +166,8 @@ public class Projeto {
 		else
 			System.out.println("Projeto foi previamente simulado");
 	}
-	
-
+        public void concluirEtapaVinculada(int idEtapa,int tempoGasto)
+        {
+            getEtapa(idEtapa).concluirEtapa(tempoGasto);
+        }
 }
