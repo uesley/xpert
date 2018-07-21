@@ -2,6 +2,7 @@ package xPertCore;
 
 import java.util.ArrayList;
 import java.lang.String;
+import model.projeto.Projeto;
 
 public class ProjetoCore {
 	private int id;
@@ -169,5 +170,20 @@ public class ProjetoCore {
         public void concluirEtapaVinculada(int idEtapa,int tempoGasto)
         {
             getEtapa(idEtapa).concluirEtapa(tempoGasto);
+        }
+        public Projeto convert()
+        {
+           Projeto targetProjeto = new Projeto();
+           int n = etapasVinculadas.size();
+           targetProjeto.setNome(getNome());
+           targetProjeto.setId(getIdentificacao());
+           targetProjeto.setSituacao((float) getSituacao());
+           
+           for(int c=0;c<n;c++)
+           {
+               targetProjeto.addEtapa(etapasVinculadas.get(c).convert());
+               targetProjeto.getEtapas().get(c).setProjeto(getIdentificacao());
+           }
+           return targetProjeto;
         }
 }
