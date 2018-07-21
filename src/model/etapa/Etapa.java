@@ -3,6 +3,7 @@ package model.etapa;
 import java.util.ArrayList;
 
 import model.IDAO;
+import xPertCore.EtapaCore;
 
 public class Etapa implements IEtapa, IDAO<Etapa> {
 
@@ -160,7 +161,7 @@ public class Etapa implements IEtapa, IDAO<Etapa> {
 
     @Override
     public void removeDependencia(Etapa dependencia) {
-        dao.removeDependencia(dependencia.getId().);
+        dao.removeDependencia(dependencia.getId());
     }
 
     @Override
@@ -176,6 +177,11 @@ public class Etapa implements IEtapa, IDAO<Etapa> {
     @Override
     public int[] getDependenciasIDs() {
         return dao.getDependenciasID();
+    }
+    public EtapaCore convert()
+    {
+        EtapaCore target = new EtapaCore(getId(),getNome(),getDuracao_prevista(),null);
+        return target;
     }
    
 }
