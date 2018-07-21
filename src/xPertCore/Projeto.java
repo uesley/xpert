@@ -6,7 +6,7 @@ import java.lang.String;
 
 
 public class Projeto {
-	private int identificacao;
+	private int id;
 	private String nome;
 	private double situacao;
 	private int ETA;
@@ -30,11 +30,11 @@ public class Projeto {
 	}
 	public int getIdentificacao()
 	{
-		return identificacao;
+		return id;
 	}
 	public void setIdentificacao(int idProjeto)
 	{	if(idProjeto >= 0)
-			identificacao = idProjeto;
+			id = idProjeto;
 		else
 			System.out.println("Id invalido");
 	}
@@ -54,7 +54,20 @@ public class Projeto {
 	}
         public int getAtraso() 
         {
-            return atraso;
+            int n=etapasVinculadas.size();
+            int tempoAtrasado=0;
+            for(int c=0;c<n;c++)
+            { 
+                if(etapasVinculadas.get(c).isRealizado())
+                {  
+                    int aux=(etapasVinculadas.get(c).getTempoDeDuracaoReal()-etapasVinculadas.get(c).getTempoDeDuracaoPrevista()-etapasVinculadas.get(c).getMaiorTempoDeFolga());
+                    
+                    if(aux>0)
+                        tempoAtrasado+=aux;
+                }
+            }
+            setAtraso(tempoAtrasado);
+            return  tempoAtrasado;
         }
         public void setAtraso(int atraso)
         {
@@ -66,6 +79,18 @@ public class Projeto {
 	public void setETA(int eTA) {
 		ETA = eTA;
 	}
+        public Etapa getEtapa(int idEtapa)
+        {
+            int n=etapasVinculadas.size();
+            for(int c=0;c<n;c++)
+            {
+                if(etapasVinculadas.get(c).getIdentificacao() == idEtapa)
+                    return etapasVinculadas.get(c);
+            }
+            
+            System.out.println("Etapa não vinculada ao projeto");
+            return null;
+        }
 	public ArrayList<Etapa> getEtapasDisponiveis()
 	{
 		int n=etapasVinculadas.size();
@@ -143,6 +168,8 @@ public class Projeto {
 		else
 			System.out.println("Projeto foi previamente simulado");
 	}
-	
-
+        public void concluirEtapaVinculada(int idEtapa,int tempoGasto)
+        {
+            getEtapa(idEtapa).concluirEtapa(tempoGasto);
+        }
 }
