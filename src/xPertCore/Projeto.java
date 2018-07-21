@@ -10,6 +10,7 @@ public class Projeto {
 	private String nome;
 	private double situacao;
 	private int ETA;
+        private int atraso;
 	private ArrayList<Etapa> etapasVinculadas = new ArrayList<Etapa>(0);
 	
 	public Projeto(ArrayList<Etapa> etapasNecessarias,int idProjeto,String nomeProjeto)
@@ -47,6 +48,14 @@ public class Projeto {
 		else
 			System.out.println("Percentual invalido");
 	}
+        public int getAtraso() 
+        {
+            return atraso;
+        }
+        public void setAtraso(int atraso)
+        {
+            this.atraso = atraso;
+        }
 	public int getETA() {
 		return ETA;
 	}
