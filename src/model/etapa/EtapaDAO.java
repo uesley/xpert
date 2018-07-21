@@ -7,7 +7,7 @@ import database.MySQLConnection;
 import java.util.Iterator;
 import model.IDAO;
 
-class EtapaDAO implements IDAO<Etapa> {
+public class EtapaDAO implements IDAO<Etapa> {
 
     protected String table = "etapas";
     private DBConnection database = new MySQLConnection();
@@ -48,6 +48,7 @@ class EtapaDAO implements IDAO<Etapa> {
         fields.add("duracao_real");
         fields.add("disponibilidade");
         fields.add("realizado");
+        fields.add("projeto");
         
         ArrayList<String> values = new ArrayList<>();
         values.add(etapa.getNome());
@@ -56,6 +57,7 @@ class EtapaDAO implements IDAO<Etapa> {
         values.add(Integer.toString(etapa.getDuracao_real()));
         values.add(Integer.toString(etapa.getDisponibilidade()?1:0));
         values.add(Integer.toString(etapa.getRealizado()?1:0));
+        values.add(Integer.toString(etapa.getProjeto()));
         database.update( 
                 table,
                 etapa.getId(),
@@ -73,14 +75,7 @@ class EtapaDAO implements IDAO<Etapa> {
         
         ArrayList<String> result = database.find(table, id);
         try{
-            etapa.setId(Integer.parseInt(result.get(0)));
-            etapa.setNome(result.get(1));
-            etapa.setDescricao(result.get(2));
-            etapa.setDuracao_prevista(Integer.parseInt(result.get(3)));
-            etapa.setDisponibilidade(Integer.parseInt(result.get(4)) != 0);
-            etapa.setRealizado(Integer.parseInt(result.get(5))!= 0);
-            etapa.setDuracao_real(Integer.parseInt(result.get(6)));
-            etapa.setProjeto(Integer.parseInt(result.get(7)));
+            mapToEtapa(etapa,result);
         }catch(NullPointerException ex){
             etapa = new Etapa();
         }
@@ -91,26 +86,25 @@ class EtapaDAO implements IDAO<Etapa> {
     public ArrayList<Etapa> get() {
         ArrayList<Etapa> etapas = new ArrayList<>();
         ArrayList<ArrayList<String>> result = database.get(table);
-        
         Iterator<ArrayList<String>> linha_i = result.iterator();
         while(linha_i.hasNext()){
             ArrayList<String> linha = linha_i.next();
-            Etapa etapa = new Etapa();
-            etapa.setId(Integer.parseInt(linha.get(0)));
-            etapa.setNome(linha.get(1));
-            etapa.setDescricao(linha.get(2));
-            etapa.setDuracao_prevista(Integer.parseInt(linha.get(3)));
-            etapa.setDisponibilidade(Integer.parseInt(linha.get(4)) != 0);
-            etapa.setRealizado(Integer.parseInt(linha.get(5)) != 0);
-            etapa.setDuracao_real(Integer.parseInt(linha.get(6)));
-            etapa.setProjeto(Integer.parseInt(linha.get(7)));
-            etapas.add(etapa);
+            etapas.add(mapToEtapa(linha));
         }
         return etapas;
     }
     
-    public void getByProject(int idProjeto){
-        
+    public ArrayList<Etapa> getByProject(int idProjeto){
+        ArrayList<Etapa> etapas = new ArrayList<>();
+        String select = "SELECT * FROM `"+table+"` "
+                + " where projeto="+idProjeto;
+        ArrayList<ArrayList<String>> result = database.query(select);
+        Iterator<ArrayList<String>> linha_i = result.iterator();
+        while(linha_i.hasNext()){
+            ArrayList<String> linha = linha_i.next();
+            etapas.add(mapToEtapa(linha));
+        }
+        return etapas;
     }
 
     public void adicionarDependencias(int dependencia){
@@ -124,6 +118,17 @@ class EtapaDAO implements IDAO<Etapa> {
                 + "WHERE dependencia=" + dependencia+" and "
                 + "dependente="+etapa.getId();
         database.command(delete);
+    }
+    
+    private void mapToEtapa(Etapa e, ArrayList<String> linha){
+            etapa.setId(Integer.parseInt(linha.get(0)));
+            etapa.setNome(linha.get(1));
+            etapa.setDescricao(linha.get(2));
+            etapa.setDuracao_prevista(Integer.parseInt(linha.get(3)));
+            etapa.setDisponibilidade(Integer.parseInt(linha.get(4)) != 0);
+            etapa.setRealizado(Integer.parseInt(linha.get(5)) != 0);
+            etapa.setDuracao_real(Integer.parseInt(linha.get(6)));
+            etapa.setProjeto(Integer.parseInt(linha.get(7)));
     }
     
     private Etapa mapToEtapa(ArrayList<String> linha){
@@ -149,16 +154,7 @@ class EtapaDAO implements IDAO<Etapa> {
         Iterator<ArrayList<String>> linha_i = result.iterator();
         while(linha_i.hasNext()){
             ArrayList<String> linha = linha_i.next();
-            Etapa etapa = new Etapa();
-            etapa.setId(Integer.parseInt(linha.get(0)));
-            etapa.setNome(linha.get(1));
-            etapa.setDescricao(linha.get(2));
-            etapa.setDuracao_prevista(Integer.parseInt(linha.get(3)));
-            etapa.setDisponibilidade(Integer.parseInt(linha.get(4)) != 0);
-            etapa.setRealizado(Integer.parseInt(linha.get(5)) != 0);
-            etapa.setDuracao_real(Integer.parseInt(linha.get(6)));
-            etapa.setProjeto(Integer.parseInt(linha.get(7)));
-            etapas.add(etapa);
+            etapas.add(mapToEtapa(linha));
         }
         return etapas;
     }

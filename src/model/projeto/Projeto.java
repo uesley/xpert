@@ -3,6 +3,7 @@ package model.projeto;
 
 import java.util.ArrayList;
 import model.IDAO;
+import model.etapa.Etapa;
 
 
 public class Projeto implements IProjeto , IDAO<Projeto>{
@@ -70,8 +71,27 @@ public class Projeto implements IProjeto , IDAO<Projeto>{
     public ArrayList<Projeto> get() {
         return dao.get();
     }
+
+    @Override
+    public ArrayList<Etapa> getEtapas() {
+        return dao.getEtapas();
+    }
+
+    @Override
+    public void addEtapa(Etapa etapa) {
+        etapa.setProjeto(id);
+        etapa.save();
+    }
+
+    @Override
+    public void removeEtapa(Etapa etapa) {
+        etapa.delete();
+    }
     
-    
-  
-  
+    @Override
+    public void removeEtapa(int etapa_id){
+        Etapa e = new Etapa();
+        e.setId(etapa_id);
+        e.delete();
+    }
 }

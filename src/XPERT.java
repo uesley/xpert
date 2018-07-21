@@ -1,5 +1,7 @@
 
+import java.util.ArrayList;
 import model.etapa.Etapa;
+import model.projeto.Projeto;
 
 public class XPERT {
 
@@ -9,7 +11,13 @@ public class XPERT {
 //            testeListEtapas();
 //            testeFindEtapa();
 //            testeEditEtapa();
-        testeListDependencias();
+//        testeAddDependencia();
+//        testeListDependencias();
+//        testeRemoveDependencia();
+//testeNovoProjeto();
+//testeListProjetos();
+testeTodo();
+
     }
 
     public static void testeInsertEtapa(String nome, String descricao, int duracao_prevista) {
@@ -45,10 +53,6 @@ public class XPERT {
         System.out.println("nome : " + etapa.getNome());
     }
 
-    public static void testeInsertProjeto() {
-
-    }
-
     public static void testeListaDependenciasID() {
         Etapa etapa = new Etapa().find(2);
         System.out.println("Dependencias de : [" + etapa.getId() + "]:" + etapa.getNome());
@@ -65,4 +69,39 @@ public class XPERT {
         }
     }
 
+    public static void testeAddDependencia(){
+        Etapa etapa = new Etapa().find(3);
+        etapa.addDependencia(1);
+    }
+
+    public static void testeRemoveDependencia(){
+        Etapa etapa = new Etapa().find(3);
+        etapa.removeDependencia(1);
+    }
+    
+    public static void testeNovoProjeto(){
+        Projeto p = new Projeto();
+        p.setNome("outro projeto novo");
+        p.save();
+    }
+    public static void testeListProjetos(){
+        for(Projeto p : new Projeto().get()){
+            System.out.println("["+p.getId()+"]: "+p.getNome());
+        }
+    }
+    
+    public static void testeTodo(){
+        Projeto p = new Projeto().find(1);
+        ArrayList<Etapa> etapas = p.getEtapas();
+        for (Etapa e : etapas){
+            System.out.print("["+e.getId()+"]: depende de: {");
+            for (int i : e.getDependenciasIDs()){
+                System.out.print(i+",");
+            }
+            System.out.println("}");
+        }
+    }
+    
+    
+    
 }

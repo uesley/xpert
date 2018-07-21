@@ -6,7 +6,7 @@ import java.lang.String;
 
 public class XPert {
 	private String Diretorio;
-	private ArrayList<Projeto> projetosAbertos = new ArrayList<Projeto>(0);
+	private ArrayList<ProjetoCore> projetosAbertos = new ArrayList<ProjetoCore>(0);
 	
 	public void abreProjeto(String nome)
 	{
@@ -29,7 +29,7 @@ public class XPert {
 		System.out.println("Projeto "+nome+" nao esta aberto" );
 		return;
 	}
-	public Projeto getProjeto(String nome)
+	public ProjetoCore getProjeto(String nome)
 	{
 		int n = projetosAbertos.size();
 		
