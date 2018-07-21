@@ -14,6 +14,8 @@ public class Etapa implements IEtapa, IDAO<Etapa> {
     private short disponibilidade;
     private short realizado;
     private int projeto;
+    private int menor_tempo_inicio;
+    private int menor_tempo_fim;
     private EtapaDAO dao;
 
     public Etapa() {
@@ -125,4 +127,48 @@ public class Etapa implements IEtapa, IDAO<Etapa> {
     public ArrayList<Etapa> get() {
         return dao.get();
     }
+
+    @Override
+    public int getMenorTempoInicio() {
+        return menor_tempo_inicio;
+    }
+
+    @Override
+    public void setMenorTempoInicio(int menorTempoInicio) {
+        menor_tempo_inicio = menorTempoInicio;
+    }
+
+    @Override
+    public int getMenorTempoFim() {
+        return menor_tempo_fim;
+    }
+
+    @Override
+    public void setMenorTempoFim(int menorTempoFim) {
+        menor_tempo_fim = menorTempoFim;
+    }
+
+    @Override
+    public void addDependencia(Etapa dependencia) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void addDependencia(int id_dependencia) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void removeDependencia(Etapa dependencia) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void removeDependencia(int id_dependencia) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
+    
+
 }
