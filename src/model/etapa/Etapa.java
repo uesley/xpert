@@ -177,7 +177,5 @@ public class Etapa implements IEtapa, IDAO<Etapa> {
     public int[] getDependenciasIDs() {
         return dao.getDependenciasID();
     }
-    
-    
-
+   
 }

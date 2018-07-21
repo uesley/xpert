@@ -7,7 +7,7 @@ import database.MySQLConnection;
 import java.util.Iterator;
 import model.IDAO;
 
-public class EtapaDAO implements IDAO<Etapa> {
+class EtapaDAO implements IDAO<Etapa> {
 
     protected String table = "etapas";
     private DBConnection database = new MySQLConnection();
@@ -81,10 +81,10 @@ public class EtapaDAO implements IDAO<Etapa> {
             etapa.setRealizado(Integer.parseInt(result.get(5))!= 0);
             etapa.setDuracao_real(Integer.parseInt(result.get(6)));
             etapa.setProjeto(Integer.parseInt(result.get(7)));
-            return etapa;
         }catch(NullPointerException ex){
-            return new Etapa();
+            etapa = new Etapa();
         }
+        return etapa;
     }
 
     @Override
@@ -108,18 +108,35 @@ public class EtapaDAO implements IDAO<Etapa> {
         }
         return etapas;
     }
+    
+    public void getByProject(int idProjeto){
+        
+    }
 
     public void adicionarDependencias(int dependencia){
-        String[] fields = {"dependennte","dependencia"};
+        String[] fields = {"dependente","dependencia"};
         String[] values = {Integer.toString(etapa.getId()), Integer.toString(dependencia)};
         database.insert("dependencias", fields, values);
     }
     
     public void removeDependencia(int dependencia){
-        String delete = "DELETE FROM DEPENDENCIAS "
+        String delete = "DELETE FROM dependencias "
                 + "WHERE dependencia=" + dependencia+" and "
                 + "dependente="+etapa.getId();
         database.command(delete);
+    }
+    
+    private Etapa mapToEtapa(ArrayList<String> linha){
+            Etapa etapa = new Etapa();
+            etapa.setId(Integer.parseInt(linha.get(0)));
+            etapa.setNome(linha.get(1));
+            etapa.setDescricao(linha.get(2));
+            etapa.setDuracao_prevista(Integer.parseInt(linha.get(3)));
+            etapa.setDisponibilidade(Integer.parseInt(linha.get(4)) != 0);
+            etapa.setRealizado(Integer.parseInt(linha.get(5)) != 0);
+            etapa.setDuracao_real(Integer.parseInt(linha.get(6)));
+            etapa.setProjeto(Integer.parseInt(linha.get(7)));
+            return etapa;
     }
     
     public ArrayList<Etapa> getDependencias(){
