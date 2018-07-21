@@ -15,6 +15,7 @@ public class Etapa implements IEtapa, IDAO<Etapa> {
     private short disponibilidade;
     private short realizado;
     private int projeto;
+    private int folga;
     private int menor_tempo_inicio;
     private int menor_tempo_fim;
     private EtapaDAO dao;
@@ -23,6 +24,14 @@ public class Etapa implements IEtapa, IDAO<Etapa> {
         dao = new EtapaDAO(this);
     }
 
+    public int getFolga() {
+        return folga;
+    }
+
+    public void setFolga(int folga) {
+        this.folga = folga;
+    }
+    
     @Override
     public int getId() {
         return id;
@@ -180,9 +189,9 @@ public class Etapa implements IEtapa, IDAO<Etapa> {
     }
     public EtapaCore convert()
     {
-        EtapaCore target = new EtapaCore(getId(),getNome(),getDuracao_prevista(),null);
+        EtapaCore target = new EtapaCoreore(getId(),getNome(),getDuracao_prevista(),getDescricao(), getDuracao_real(), getRealizado(), getMenorTempoInicio(), getMenorTempoFim(), getFolga(),null);
         return target;
     }
-   
-    
 }
+
+
