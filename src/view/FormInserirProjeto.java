@@ -7,8 +7,23 @@ public class FormInserirProjeto extends javax.swing.JFrame {
     private int count = 1;
     public FormInserirProjeto() {
         initComponents();
+        configJanela();
+    }
+    
+    public FormInserirProjeto(MenuPrincipal aThis, boolean b) {
+        initComponents();
+        configJanela();
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    private void configJanela (){
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        this.setTitle("Cadastrar Projeto");
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
+        this.setVisible(true);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -24,7 +39,7 @@ public class FormInserirProjeto extends javax.swing.JFrame {
         painelAcoes = new javax.swing.JPanel();
         btnSalvar = new javax.swing.JButton();
         btnSimular = new javax.swing.JButton();
-        btnFechar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
         painelEtapa = new javax.swing.JPanel();
         lblEtapa = new javax.swing.JLabel();
         txtEtapa = new javax.swing.JTextField();
@@ -60,8 +75,7 @@ public class FormInserirProjeto extends javax.swing.JFrame {
             .addGroup(painelProjetoLayout.createSequentialGroup()
                 .addComponent(lblProjeto, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtProjeto, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(txtProjeto, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE))
         );
         painelProjetoLayout.setVerticalGroup(
             painelProjetoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -69,7 +83,7 @@ public class FormInserirProjeto extends javax.swing.JFrame {
             .addComponent(txtProjeto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        painelAcoes.setLayout(new java.awt.GridLayout(1, 0));
+        painelAcoes.setLayout(new java.awt.GridLayout());
 
         btnSalvar.setText("Salvar");
         painelAcoes.add(btnSalvar);
@@ -77,43 +91,37 @@ public class FormInserirProjeto extends javax.swing.JFrame {
         btnSimular.setText("Simular");
         painelAcoes.add(btnSimular);
 
-        btnFechar.setText("Fechar");
-        btnFechar.addActionListener(new java.awt.event.ActionListener() {
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFecharActionPerformed(evt);
+                btnCancelarActionPerformed(evt);
             }
         });
-        painelAcoes.add(btnFechar);
+        painelAcoes.add(btnCancelar);
 
-        painelEtapa.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
-        painelEtapa.setLayout(new java.awt.GridLayout(1, 0));
+        painelEtapa.setToolTipText("bvbvbv");
+        painelEtapa.setPreferredSize(new java.awt.Dimension(900, 30));
 
         lblEtapa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblEtapa.setText("Etapa");
-        painelEtapa.add(lblEtapa);
-        painelEtapa.add(txtEtapa);
 
         lblDuracao.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblDuracao.setText("Duração");
-        painelEtapa.add(lblDuracao);
 
         txtDuracao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDuracaoActionPerformed(evt);
             }
         });
-        painelEtapa.add(txtDuracao);
 
         lblDependencia.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblDependencia.setText("Dependências");
-        painelEtapa.add(lblDependencia);
 
         txtDependencias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDependenciasActionPerformed(evt);
             }
         });
-        painelEtapa.add(txtDependencias);
 
         btnInserir.setText("Inserir Etapa");
         btnInserir.addActionListener(new java.awt.event.ActionListener() {
@@ -121,7 +129,37 @@ public class FormInserirProjeto extends javax.swing.JFrame {
                 btnInserirActionPerformed(evt);
             }
         });
-        painelEtapa.add(btnInserir);
+
+        javax.swing.GroupLayout painelEtapaLayout = new javax.swing.GroupLayout(painelEtapa);
+        painelEtapa.setLayout(painelEtapaLayout);
+        painelEtapaLayout.setHorizontalGroup(
+            painelEtapaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelEtapaLayout.createSequentialGroup()
+                .addGap(2, 2, 2)
+                .addComponent(lblEtapa, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(txtEtapa, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(lblDuracao, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(txtDuracao, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(lblDependencia, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(txtDependencias, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(btnInserir, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        painelEtapaLayout.setVerticalGroup(
+            painelEtapaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblEtapa, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(txtEtapa, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(lblDuracao, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(txtDuracao, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(lblDependencia, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(txtDependencias, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(btnInserir, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         jTProjeto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -159,27 +197,26 @@ public class FormInserirProjeto extends javax.swing.JFrame {
         painelTabela.setLayout(painelTabelaLayout);
         painelTabelaLayout.setHorizontalGroup(
             painelTabelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 900, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         painelTabelaLayout.setVerticalGroup(
             painelTabelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 536, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(painelTabela, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(painelAcoes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(painelEtapa, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 980, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(painelAcoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(painelProjeto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(painelTabela, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(painelEtapa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,9 +226,9 @@ public class FormInserirProjeto extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addComponent(painelEtapa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(painelTabela, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(painelTabela, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(painelAcoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(painelAcoes, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -200,9 +237,9 @@ public class FormInserirProjeto extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         dispose();
-    }//GEN-LAST:event_btnFecharActionPerformed
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void txtProjetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProjetoActionPerformed
         // TODO add your handling code here:
@@ -224,6 +261,7 @@ public class FormInserirProjeto extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDuracaoActionPerformed
 
+    
     /**
      * @param args the command line arguments
      */
@@ -263,7 +301,7 @@ public class FormInserirProjeto extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnFechar;
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnInserir;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JButton btnSimular;

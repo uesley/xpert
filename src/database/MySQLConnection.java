@@ -14,10 +14,10 @@ public class MySQLConnection implements DBConnection {
     private String HOST = "localhost";
     private String PORT = "3306";
     private String USER = "root";
-    private String PASS = "?R00t_bd!";
+    private String PASS = "";
     private String BASE = "xpert";
     private String DRIVER = "com.mysql.cj.jdbc.Driver";
-    private String URL = "jdbc:mysql://" + HOST + "/" + BASE;
+    private String URL = "jdbc:mysql://" + HOST + "/" + BASE + "?useTimezone=true&serverTimezone=UTC";
 
     public MySQLConnection() {
 
@@ -33,6 +33,7 @@ public class MySQLConnection implements DBConnection {
             System.exit(0);
         } catch (SQLException e) {
             System.out.println("As informações de conexão com o Banco estão desatualizadas");
+            System.out.println(e.getMessage());
             System.exit(0);
         }
 

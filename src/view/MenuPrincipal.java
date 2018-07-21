@@ -1,9 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view;
+
+import javax.swing.JDialog;
 
 /**
  *
@@ -27,82 +24,63 @@ public class MenuPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabelXPert = new javax.swing.JLabel();
-        jButtonCadastrarProjeto = new javax.swing.JButton();
-        jButtonAbrirProjeto = new javax.swing.JButton();
-        jButtonExcluirProjeto = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        menuCadastrar = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1000, 700));
+        setResizable(false);
 
-        jLabelXPert.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jLabelXPert.setText("XPert");
+        jMenu1.setText("Projetos");
 
-        jButtonCadastrarProjeto.setText("Cadastrar Projeto");
-        jButtonCadastrarProjeto.addActionListener(new java.awt.event.ActionListener() {
+        menuCadastrar.setText("Cadastrar Projeto");
+        menuCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCadastrarProjetoActionPerformed(evt);
+                menuCadastrarActionPerformed(evt);
             }
         });
+        jMenu1.add(menuCadastrar);
 
-        jButtonAbrirProjeto.setText("Abrir Projeto");
-        jButtonAbrirProjeto.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem2.setText("Abrir Projeto");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAbrirProjetoActionPerformed(evt);
+                jMenuItem2ActionPerformed(evt);
             }
         });
+        jMenu1.add(jMenuItem2);
 
-        jButtonExcluirProjeto.setText("Excluir Projeto");
-        jButtonExcluirProjeto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonExcluirProjetoActionPerformed(evt);
-            }
-        });
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Sobre");
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(264, 264, 264)
-                .addComponent(jLabelXPert)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(jButtonCadastrarProjeto, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(65, 65, 65)
-                .addComponent(jButtonAbrirProjeto, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
-                .addComponent(jButtonExcluirProjeto, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43))
+            .addGap(0, 645, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabelXPert)
-                .addGap(47, 47, 47)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonCadastrarProjeto, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonAbrirProjeto, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonExcluirProjeto, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(51, Short.MAX_VALUE))
+            .addGap(0, 428, Short.MAX_VALUE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonCadastrarProjetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarProjetoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonCadastrarProjetoActionPerformed
+    private void menuCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadastrarActionPerformed
+        FormInserirProjeto form = new FormInserirProjeto (this, true);
+    }//GEN-LAST:event_menuCadastrarActionPerformed
 
-    private void jButtonAbrirProjetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAbrirProjetoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonAbrirProjetoActionPerformed
-
-    private void jButtonExcluirProjetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirProjetoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonExcluirProjetoActionPerformed
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        FormAbrirProjetos form = new FormAbrirProjetos (this, true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -140,9 +118,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonAbrirProjeto;
-    private javax.swing.JButton jButtonCadastrarProjeto;
-    private javax.swing.JButton jButtonExcluirProjeto;
-    private javax.swing.JLabel jLabelXPert;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem menuCadastrar;
     // End of variables declaration//GEN-END:variables
 }
