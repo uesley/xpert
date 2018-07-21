@@ -17,7 +17,7 @@ public class Projeto {
 	{
 		etapasVinculadas = etapasNecessarias;
 		setIdentificacao(idProjeto);
-		setNome(nomeProjeto);
+		setNome(nomeProjeto);   
 		setETA(-1);
 	}
 	public String getNome()
@@ -40,13 +40,17 @@ public class Projeto {
 	}
 	public double getSituacao()
 	{
-		return situacao;
-	}
-	public void setSituacao(double p)
-	{	if(p>=0)
-			situacao = p;
-		else
-			System.out.println("Percentual invalido");
+            int n=etapasVinculadas.size();
+            int tempoRealizado=0,tempoTotal=0;
+            for(int c=0;c<n;c++)
+            {
+                if(etapasVinculadas.get(c).isRealizado())
+                    tempoRealizado+=etapasVinculadas.get(c).getTempoDeDuracaoPrevista();
+                
+                tempoTotal+=etapasVinculadas.get(c).getTempoDeDuracaoPrevista();
+            }
+            
+            return (double) tempoRealizado/tempoTotal;
 	}
         public int getAtraso() 
         {
