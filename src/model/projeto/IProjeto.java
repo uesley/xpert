@@ -1,6 +1,9 @@
 
 package model.projeto;
 
+import java.util.ArrayList;
+import model.etapa.Etapa;
+
 public interface IProjeto {
  
     int getId();
@@ -15,6 +18,13 @@ public interface IProjeto {
 
     public void setSituacao(float situacao);
     
-
+    public ArrayList<Etapa> getEtapas();
+    
+    public void addEtapa(Etapa etapa);
+    
+    public void removeEtapa(Etapa etapa);
+    
+    public void removeEtapa(int etapa_id);
+    
     
 }

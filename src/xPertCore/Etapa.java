@@ -1,7 +1,6 @@
 package xPertCore;
 
 import java.util.ArrayList;
-import java.lang.String;
 
 public class Etapa {
 	private int id;

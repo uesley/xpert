@@ -160,7 +160,7 @@ public class Etapa implements IEtapa, IDAO<Etapa> {
 
     @Override
     public void removeDependencia(Etapa dependencia) {
-        dao.removeDependencia(dependencia.getId().);
+        dao.removeDependencia(dependencia.getId());
     }
 
     @Override
@@ -178,4 +178,5 @@ public class Etapa implements IEtapa, IDAO<Etapa> {
         return dao.getDependenciasID();
     }
    
+    
 }
