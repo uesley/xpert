@@ -4,6 +4,8 @@ package model.projeto;
 import java.util.ArrayList;
 import model.IDAO;
 import model.etapa.Etapa;
+import xPertCore.EtapaCore;
+import xPertCore.ProjetoCore;
 
 
 public class Projeto implements IProjeto , IDAO<Projeto>{
@@ -93,5 +95,28 @@ public class Projeto implements IProjeto , IDAO<Projeto>{
         Etapa e = new Etapa();
         e.setId(etapa_id);
         e.delete();
+    }
+    public ProjetoCore convert()
+    {   ArrayList<Etapa> aux = getEtapas();
+        ArrayList<EtapaCore> etapasTarget = new ArrayList<>(0);
+        int n = aux.size();
+        
+        for(int c=0;c<n;c++)
+            etapasTarget.add(c,aux.get(c).convert());
+        
+        for(int c=0;c<n;c++)
+        {
+            ArrayList<EtapaCore> etapasTargetRef = new ArrayList<>(0);
+            int idDep[] = aux.get(c).getDependenciasIDs();
+            for(int j=0;j<idDep.length;j++)
+                for(int k=0;k<n;k++)
+                {
+                    if(idDep[j] == etapasTarget.get(k).getIdentificacao())
+                       etapasTargetRef.add(etapasTarget.get(k));
+                }
+            etapasTarget.get(c).setListaDeDependencias(etapasTargetRef);
+        }
+        ProjetoCore target = new ProjetoCore(etapasTarget,getId(),getNome());
+        return target;
     }
 }

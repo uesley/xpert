@@ -49,4 +49,7 @@ public interface IEtapa {
     public void removeDependencia(int id_dependencia); 
     public ArrayList<Etapa> getDependencias();
     public int[] getDependenciasIDs();
+    public int getFolga();
+
+    public void setFolga(int folga);
 }

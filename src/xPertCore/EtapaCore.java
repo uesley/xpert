@@ -2,6 +2,7 @@ package xPertCore;
 
 import java.util.ArrayList;
 import java.lang.String;
+import model.etapa.Etapa;
 
 public class EtapaCore {
 	private int id;
@@ -12,6 +13,15 @@ public class EtapaCore {
 	private int menorTempoDeIncio;
 	private int menorTempoDeFim;
 	private int maiorTempoDeFolga;
+        private String descricao;
+
+        public String getDescricao() {
+            return descricao;
+        }
+
+        public void setDescricao(String descricao) {
+            this.descricao = descricao;
+        }
 	private ArrayList<EtapaCore> listaDeDependencias = new ArrayList<EtapaCore>(0);
 	
 	public EtapaCore(int idEtapa,String nomeEtapa,int ETA,ArrayList<EtapaCore> listaDeDependencias)
@@ -20,6 +30,20 @@ public class EtapaCore {
 		setNome(nomeEtapa);
 		setTempoDeDuracaoPrevista(ETA);
 		setRealizado(false);
+		this.listaDeDependencias = listaDeDependencias;
+	}
+        public EtapaCore(int idEtapa,String nomeEtapa,int ETA,String descricao,int tempoDeDuracaoReal,boolean realizado,int menorTempoDeInicio,int menorTempoDeFim,int maiorTempoDeFolga,ArrayList<EtapaCore> listaDeDependencias)
+	{
+		setIdentificacao(idEtapa);
+		setNome(nomeEtapa);
+		setTempoDeDuracaoPrevista(ETA);
+		setRealizado(false);
+                setDescricao(descricao);
+                setTempoDeDuracaoReal(tempoDeDuracaoReal);
+                setRealizado(realizado);
+                setMenorTempoDeIncio(menorTempoDeIncio);
+                setMenorTempoDeFim(menorTempoDeFim);
+                setMaiorTempoDeFolga(maiorTempoDeFolga);
 		this.listaDeDependencias = listaDeDependencias;
 	}
 
@@ -124,6 +148,13 @@ public class EtapaCore {
 		setRealizado(true);
 		
 	}
+        public Etapa convert()
+        {
+            Etapa targetEtapa = new Etapa();
+            targetEtapa.setDescricao(nome);
+            
+            return targetEtapa;
+        }
 	
 	
 	
