@@ -3,17 +3,16 @@ package view;
 import java.util.ArrayList;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.ListModel;
 import model.projeto.Projeto;
 
-public class FormAbrirProjetos extends javax.swing.JFrame {
+public class FormAbrirProjeto extends javax.swing.JFrame {
     private ArrayList <Projeto> listaProjetos = new Projeto().get();
-    public FormAbrirProjetos() {
+    public FormAbrirProjeto() {
         initComponents();
         configJanela();
     }
 
-    public FormAbrirProjetos(MenuPrincipal aThis, boolean b) {
+    public FormAbrirProjeto(MenuPrincipal aThis, boolean b) {
         initComponents();
         configJanela();
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -56,6 +55,11 @@ public class FormAbrirProjetos extends javax.swing.JFrame {
         painelAcoes.add(btnAbrir);
 
         btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
         painelAcoes.add(btnExcluir);
 
         btnCancelar.setText("Cancelar");
@@ -109,6 +113,10 @@ public class FormAbrirProjetos extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -126,24 +134,36 @@ public class FormAbrirProjetos extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormAbrirProjetos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormAbrirProjeto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormAbrirProjetos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormAbrirProjeto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormAbrirProjetos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormAbrirProjeto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormAbrirProjetos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormAbrirProjeto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                FormAbrirProjetos  form = new FormAbrirProjetos();
-                form.setLocationRelativeTo(null);
-                form.setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            FormAbrirProjeto  form = new FormAbrirProjeto();
+            form.setLocationRelativeTo(null);
+            form.setVisible(true);
         });
     }
 

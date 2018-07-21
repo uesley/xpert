@@ -75,11 +75,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menuCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadastrarActionPerformed
-        FormInserirProjeto form = new FormInserirProjeto (this, true);
+        OpenProject form = new OpenProject (this, true);
     }//GEN-LAST:event_menuCadastrarActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        FormAbrirProjetos form = new FormAbrirProjetos (this, true);
+        FormAbrirProjeto form = new FormAbrirProjeto (this, true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
