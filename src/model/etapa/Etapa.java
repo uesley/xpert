@@ -150,24 +150,33 @@ public class Etapa implements IEtapa, IDAO<Etapa> {
 
     @Override
     public void addDependencia(Etapa dependencia) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        dao.adicionarDependencias(dependencia.getId());
     }
 
     @Override
     public void addDependencia(int id_dependencia) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        dao.adicionarDependencias(id_dependencia);
     }
 
     @Override
     public void removeDependencia(Etapa dependencia) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        dao.removeDependencia(dependencia.getId().);
     }
 
     @Override
     public void removeDependencia(int id_dependencia) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        dao.removeDependencia(id_dependencia);
     }
-    
+
+    @Override
+    public ArrayList<Etapa> getDependencias() {
+        return dao.getDependencias();
+    }
+
+    @Override
+    public int[] getDependenciasIDs() {
+        return dao.getDependenciasID();
+    }
     
     
 

@@ -109,4 +109,52 @@ public class EtapaDAO implements IDAO<Etapa> {
         return etapas;
     }
 
+    public void adicionarDependencias(int dependencia){
+        String[] fields = {"dependennte","dependencia"};
+        String[] values = {Integer.toString(etapa.getId()), Integer.toString(dependencia)};
+        database.insert("dependencias", fields, values);
+    }
+    
+    public void removeDependencia(int dependencia){
+        String delete = "DELETE FROM DEPENDENCIAS "
+                + "WHERE dependencia=" + dependencia+" and "
+                + "dependente="+etapa.getId();
+        database.command(delete);
+    }
+    
+    public ArrayList<Etapa> getDependencias(){
+        ArrayList<Etapa> etapas = new ArrayList<>();
+        String select = "SELECT "
+                + "id,nome,descricao, duracao_prevista,disponibilidade,realizado,duracao_real,projeto"
+                + " FROM dependencias inner join etapas on (dependencia = id)"
+                + " where dependente="+etapa.getId();
+        ArrayList<ArrayList<String>> result = database.query(select);
+        Iterator<ArrayList<String>> linha_i = result.iterator();
+        while(linha_i.hasNext()){
+            ArrayList<String> linha = linha_i.next();
+            Etapa etapa = new Etapa();
+            etapa.setId(Integer.parseInt(linha.get(0)));
+            etapa.setNome(linha.get(1));
+            etapa.setDescricao(linha.get(2));
+            etapa.setDuracao_prevista(Integer.parseInt(linha.get(3)));
+            etapa.setDisponibilidade(Integer.parseInt(linha.get(4)) != 0);
+            etapa.setRealizado(Integer.parseInt(linha.get(5)) != 0);
+            etapa.setDuracao_real(Integer.parseInt(linha.get(6)));
+            etapa.setProjeto(Integer.parseInt(linha.get(7)));
+            etapas.add(etapa);
+        }
+        return etapas;
+    }
+    
+    public int[] getDependenciasID(){
+        String select = "SELECT dependencia as id FROM dependencias where dependente="+etapa.getId();
+        ArrayList<ArrayList<String>> resultBD = database.query(select);
+        int result[] = new int[resultBD.size()];
+        int i=0;
+        for(ArrayList<String> row : resultBD)
+            result[i++] = (Integer.parseInt(row.get(0)));
+        return result;
+    }
+    
+    
 }

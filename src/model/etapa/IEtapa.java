@@ -46,6 +46,7 @@ public interface IEtapa {
     public void addDependencia(Etapa dependencia);
     public void addDependencia(int id_dependencia);
     public void removeDependencia(Etapa dependencia);
-    public void removeDependencia(int id_dependencia);
-//        public ArrayList<Etapa> getDependencias();
+    public void removeDependencia(int id_dependencia); 
+    public ArrayList<Etapa> getDependencias();
+    public int[] getDependenciasIDs();
 }
