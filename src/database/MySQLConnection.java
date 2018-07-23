@@ -17,7 +17,8 @@ public class MySQLConnection implements DBConnection {
     private String PASS = "";
     private String BASE = "xpert";
     private String DRIVER = "com.mysql.cj.jdbc.Driver";
-    private String URL = "jdbc:mysql://" + HOST + "/" + BASE + "?useTimezone=true&serverTimezone=UTC";
+    private String PARAMETERS = "?useTimezone=true&serverTimezone=UTC&autoReconnect=true&useSSL=false";
+    private String URL = "jdbc:mysql://" + HOST + "/" + BASE+PARAMETERS;
 
     public MySQLConnection() {
 
