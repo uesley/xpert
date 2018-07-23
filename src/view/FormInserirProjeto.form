@@ -31,11 +31,9 @@
               <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="painelAcoes" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="painelProjeto" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="painelTabela" alignment="0" max="32767" attributes="0"/>
-                      <Component id="painelEtapa" alignment="0" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="painelProjeto" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="painelTabela" alignment="0" max="32767" attributes="0"/>
+                  <Component id="painelEtapa" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace pref="59" max="32767" attributes="0"/>
           </Group>
