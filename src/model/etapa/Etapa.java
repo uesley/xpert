@@ -189,7 +189,7 @@ public class Etapa implements IEtapa, IDAO<Etapa> {
     }
     public EtapaCore convert()
     {
-        EtapaCore target = new EtapaCoreore(getId(),getNome(),getDuracao_prevista(),getDescricao(), getDuracao_real(), getRealizado(), getMenorTempoInicio(), getMenorTempoFim(), getFolga(),null);
+        EtapaCore target = new EtapaCore(getId(),getNome(),getDuracao_prevista(),getDescricao(), getDuracao_real(), getRealizado(), getMenorTempoInicio(), getMenorTempoFim(), getFolga(),null);
         return target;
     }
 }
