@@ -150,7 +150,7 @@ public class EtapaCore {
 	}
         public Etapa convert()
         {
-            Etapa targetEtapa = new Etapa();
+            Etapa targetEtapa = new Etapa(0);//Isso é resolvido em cima na classe ProjetoCore
             targetEtapa.setDescricao(getDescricao());
             targetEtapa.setDisponibilidade(isDisponivel());
             targetEtapa.setDuracao_prevista(getTempoDeDuracaoPrevista());
