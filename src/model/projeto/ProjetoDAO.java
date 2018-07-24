@@ -42,7 +42,6 @@ class ProjetoDAO implements IDAO<Projeto> {
                 + "  `disponibilidade` TINYINT NULL DEFAULT '0',\n"
                 + "  `realizado` TINYINT NULL DEFAULT '0',\n"
                 + "  `duracao_real` INT NULL DEFAULT 0,\n"
-                + "  `projeto` INT NULL,\n"
                 + "  `folga` INT NULL DEFAULT 0,\n"
                 + "  `menor_tempo_inicio` INT NULL DEFAULT 0,\n"
                 + "  `maior_tempo_fim` INT NULL DEFAULT 0,\n"
@@ -110,8 +109,8 @@ class ProjetoDAO implements IDAO<Projeto> {
     }
 
     public ArrayList<Etapa> getEtapas() {
-        EtapaDAO dao = new EtapaDAO(new Etapa(projeto.getId()),projeto.getId());
-        return dao.getByProject(projeto.getId());
+//        Etapa  = new EtapaDAO(new Etapa(projeto.getId()),projeto.getId());
+        return new Etapa(projeto.getId()).get();
     }
 
     public void export(String fileName) {

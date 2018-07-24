@@ -136,6 +136,7 @@ public class MySQLConnection implements DBConnection {
 
     @Override
     public ArrayList<ArrayList<String>> get(String table) {
+        System.out.println("BASE: "+BASE+" URL: "+URL);
         String query = "SELECT * FROM `" + table + "`";
         return query(query);
     }

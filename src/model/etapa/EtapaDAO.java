@@ -76,15 +76,12 @@ public class EtapaDAO implements IDAO<Etapa> {
 
     @Override
     public Etapa find(int id) {
-
-        System.out.println("baseName: "+baseName);
         ArrayList<String> result = database.find(table, id);
         try{
             mapToEtapa(etapa,result);
         }catch(NullPointerException ex){
             etapa = new Etapa(projeto);
         }
-        System.out.println(database.getLastQuery());
         return etapa;
     }
 
@@ -99,19 +96,7 @@ public class EtapaDAO implements IDAO<Etapa> {
         }
         return etapas;
     }
-    
-    public ArrayList<Etapa> getByProject(int idProjeto){
-        ArrayList<Etapa> etapas = new ArrayList<>();
-        String select = "SELECT * FROM `"+table+"` "
-                + " where projeto="+idProjeto;
-        ArrayList<ArrayList<String>> result = database.query(select);
-        Iterator<ArrayList<String>> linha_i = result.iterator();
-        while(linha_i.hasNext()){
-            ArrayList<String> linha = linha_i.next();
-            etapas.add(mapToEtapa(linha));
-        }
-        return etapas;
-    }
+
 
     public void adicionarDependencias(int dependencia){
         String[] fields = {"dependente","dependencia"};
@@ -138,7 +123,7 @@ public class EtapaDAO implements IDAO<Etapa> {
     }
     
     private Etapa mapToEtapa(ArrayList<String> linha){
-            Etapa etapa = new Etapa(projeto);
+            Etapa etapa = new Etapa(Integer.parseInt(linha.get(7)));
             etapa.setId(Integer.parseInt(linha.get(0)));
             etapa.setNome(linha.get(1));
             etapa.setDescricao(linha.get(2));
