@@ -6,6 +6,7 @@ import model.etapa.Etapa;
 
 public class EtapaCore {
 	private int id;
+        private int id_projeto;
 	private String nome;
 	private int tempoDeDuracaoPrevista;
 	private int tempoDeDuracaoReal;
@@ -24,7 +25,7 @@ public class EtapaCore {
         }
 	private ArrayList<EtapaCore> listaDeDependencias = new ArrayList<EtapaCore>(0);
 	
-	public EtapaCore(int idEtapa,String nomeEtapa,int ETA,ArrayList<EtapaCore> listaDeDependencias)
+	public EtapaCore(int idEtapa,String nomeEtapa,int ETA,ArrayList<EtapaCore> listaDeDependencias, int id_projeto)
 	{
 		setIdentificacao(idEtapa);
 		setNome(nomeEtapa);
@@ -148,9 +149,9 @@ public class EtapaCore {
 		setRealizado(true);
 		
 	}
-        public Etapa convert()
+        public Etapa convert(int id_projeto)
         {
-            Etapa targetEtapa = new Etapa();
+            Etapa targetEtapa = new Etapa(id_projeto);
             targetEtapa.setDescricao(getDescricao());
             targetEtapa.setDisponibilidade(isDisponivel());
             targetEtapa.setDuracao_prevista(getTempoDeDuracaoPrevista());

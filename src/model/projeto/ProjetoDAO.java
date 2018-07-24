@@ -22,8 +22,8 @@ class ProjetoDAO implements IDAO<Projeto> {
 
     @Override
     public void save() {
-        String fields[] = {"nome"};
-        String values[] = {projeto.getNome()};
+        String fields[] = {"nome","simulado","situacao"};
+        String values[] = {projeto.getNome(), Integer.toString(projeto.getSimulado()?1:0), Float.toString(projeto.getSituacao())};
         database.insert(table, fields, values);
         int id = Integer.parseInt(database.query("select max(id) from projetos").get(0).get(0));
         String newBD = projectDB + id;
@@ -84,7 +84,7 @@ class ProjetoDAO implements IDAO<Projeto> {
             projeto.setId(Integer.parseInt(result.get(0)));
             projeto.setNome(result.get(1));
             projeto.setSituacao(Float.parseFloat(result.get(2)));
-
+            projeto.setSimulado(Integer.parseInt(result.get(3))== 1);
         } catch (NullPointerException ex) {
             projeto = new Projeto();
         }
@@ -103,6 +103,7 @@ class ProjetoDAO implements IDAO<Projeto> {
             projeto.setId(Integer.parseInt(linha.get(0)));
             projeto.setNome(linha.get(1));
             projeto.setSituacao(Float.parseFloat(linha.get(2)));
+             projeto.setSimulado(Integer.parseInt(linha.get(3))== 1);
             projetos.add(projeto);
         }
         return projetos;

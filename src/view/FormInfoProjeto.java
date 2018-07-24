@@ -5,7 +5,12 @@
  */
 package view;
 
+import java.util.ArrayList;
+import javax.swing.JTable;
+import model.etapa.Etapa;
 import model.projeto.Projeto;
+import xPertCore.EtapaCore;
+import xPertCore.ProjetoCore;
 
 /**
  *
@@ -16,19 +21,44 @@ public class FormInfoProjeto extends javax.swing.JFrame {
     /**
      * Creates new form PaginaDeProjeto
      */
+    private Projeto projeto;
+    private ArrayList<EtapaCore> etapas;
+    private ProjetoCore projetoCore;
     public FormInfoProjeto(Projeto p) {
+        projeto = p;
+        projetoCore = projeto.convert();
+        projetoCore.simular();
+        projeto = projetoCore.convert();
+        etapas = projetoCore.getEtapasDisponiveis();
         initComponents();
         configJanela();
+        
     }
     
     private void configJanela() {
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        this.setTitle("Projetos");
+        this.setTitle("Projeto: "+projeto.getNome());
         this.setLocationRelativeTo(null);
         this.setResizable(false);
-        this.setVisible(true);;
+        this.setVisible(true);
     }
 
+     private void fillTabela(){
+        String [][] data = new String[etapas.size()][4];
+        int i =0;
+        for (EtapaCore e : etapas){
+            String[] row = {
+                Integer.toString(e.getIdentificacao()),
+                e.getNome(), 
+                Integer.toString(e.getTempoDeDuracaoPrevista()),
+                Integer.toString(e.getMaiorTempoDeFolga()),
+            };
+            data[i++] = row;
+        }
+        String titulos[] = {"id","nome","ETA","folga"};
+        jTable1 = new JTable(data,titulos);
+    } 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -98,6 +128,7 @@ public class FormInfoProjeto extends javax.swing.JFrame {
                 "Nº", "Etapa", "ETA", "Concluído em"
             }
         ));
+        fillTabela();
         jScrollPane1.setViewportView(jTable1);
 
         jLabelEtapasRealizadas.setText("Etapas Realizadas:");

@@ -6,9 +6,9 @@ import model.projeto.Projeto;
 public class XPERT {
 
     public static void main(String[] args) {
-
-        // testeInsertEtapa("Novo Nome", "uma descricao qualquer", 12);
-//            testeListEtapas();
+            
+//         testeInsertEtapa("Novo Nome", "uma descricao qualquer", 12);
+//        testeListEtapas();
 //            testeFindEtapa();
 //            testeEditEtapa();
 //        testeAddDependencia();
@@ -17,46 +17,29 @@ public class XPERT {
 //testeNovoProjeto();
 //testeListProjetos();
 //        testeTodo();
-        Projeto p = new Projeto();
-        p.setNome("NovoProjeto");
-        p.setSituacao(0);
-        p.save();
-        System.out.println(p.getId());
-        Etapa e = new Etapa(p.getId()).find(3);
-        System.out.println("E: " + e.getNome());
-        e.addDependencia(3);
-        e.setNome("uma ai");
-        e.setDescricao("descricao da etapa");
-        e.setProjeto(p.getId());
-        e.setDuracao_prevista(30);
-        e.save();
-        Etapa e2 = new Etapa(p.getId()).find(5);
-        e2.addDependencia(e);
-        e2.setNome("outro nome");
-        e2.setDescricao("Uma outra etapa");
-        e2.setProjeto(p.getId());
-        e2.setDuracao_prevista(20);
-        e2.save();
-        e2.addDependencia(e);
-        p.export("/home/uesleymelo/xpert/xpert/base.sql");
-        new Projeto().acquire("/home/uesleymelo/xpert/xpert/base.sql", "Projeto Importado");
+        
 
     }
 
+    
+    
+    
     public static void testeInsertEtapa(String nome, String descricao, int duracao_prevista) {
-        Etapa etapa = new Etapa(42);
-        etapa.setNome(nome);
-        etapa.setDescricao(descricao);
-        etapa.setDuracao_prevista(duracao_prevista);
-        etapa.setProjeto(1);
-        etapa.save();
+        Projeto p = new Projeto().find(42);
+        Etapa e = new Etapa(p.getId());
+        e.setNome("Etapa");
+        e.setDescricao("Descricao da nova etapa");
+        e.setDuracao_prevista(100);
+        p.addEtapa(e);
+        
     }
 
     public static void testeListEtapas() {
-        Etapa etapa = new Etapa(42);
-        for (Etapa e : etapa.get()) {
-            System.out.println("id: " + e.getId());
-            System.out.println("nome: " + e.getNome());
+        for (Etapa e : new Projeto().find(42).getEtapas()){
+            System.out.print("[ "+e.getId()+" ,");
+            System.out.print(" "+e.getNome()+ " ,");
+            System.out.print(" "+e.getDescricao()+" ,");
+            System.out.print(" "+e.getDuracao_prevista()+" ]\n");
         }
     }
 
@@ -85,7 +68,7 @@ public class XPERT {
     }
 
     public static void testeListDependencias() {
-        Etapa etapa = new Etapa(42).find(2);
+        Etapa etapa = new Etapa(42).find(5);
         System.out.println("Dependencias de : [" + etapa.getId() + "]:" + etapa.getNome());
         for (Etapa e : etapa.getDependencias()) {
             System.out.println("[" + e.getId() + "] : " + e.getNome() + "");
@@ -124,6 +107,32 @@ public class XPERT {
             }
             System.out.println("}");
         }
+    }
+    
+    public static void testeExportacaoImportacao(){
+        Projeto p = new Projeto();
+        p.setNome("NovoProjeto");
+        p.setSituacao(0);
+        p.save();
+        System.out.println(p.getId());
+        Etapa e = new Etapa(p.getId());
+        System.out.println("E: " + e.getNome());
+        e.addDependencia(3);
+        e.setNome("uma ai");
+        e.setDescricao("descricao da etapa");
+        e.setProjeto(p.getId());
+        e.setDuracao_prevista(30);
+        e.save();
+        Etapa e2 = new Etapa(p.getId());
+        e2.addDependencia(e);
+        e2.setNome("outro nome");
+        e2.setDescricao("Uma outra etapa");
+        e2.setProjeto(p.getId());
+        e2.setDuracao_prevista(20);
+        e2.save();
+        e2.addDependencia(e);
+        p.export("/home/uesleymelo/xpert/xpert/base.sql");
+        new Projeto().acquire("/home/uesleymelo/xpert/xpert/base.sql", "Projeto Importado");
     }
 
 }

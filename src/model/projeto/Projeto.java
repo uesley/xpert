@@ -14,10 +14,30 @@ public class Projeto implements IProjeto , IDAO<Projeto>{
   private String nome;
   private float situacao;
   private ProjetoDAO dao;
-
+  private boolean simulado;
+  
   public Projeto(){
       this.dao = new ProjetoDAO(this);
+      
   }
+
+    public ProjetoDAO getDao() {
+        return dao;
+    }
+
+    public void setDao(ProjetoDAO dao) {
+        this.dao = dao;
+    }
+
+    public boolean getSimulado() {
+        return simulado;
+    }
+
+    public void setSimulado(boolean simulado) {
+        this.simulado = simulado;
+    }
+  
+  
   
   @Override
     public int getId() {
@@ -78,6 +98,7 @@ public class Projeto implements IProjeto , IDAO<Projeto>{
     public ArrayList<Etapa> getEtapas() {
         return dao.getEtapas();
     }
+    
 
     @Override
     public void addEtapa(Etapa etapa) {
@@ -97,7 +118,8 @@ public class Projeto implements IProjeto , IDAO<Projeto>{
         e.delete();
     }
     public ProjetoCore convert()
-    {   ArrayList<Etapa> aux = getEtapas();
+    {   
+        ArrayList<Etapa> aux = getEtapas();
         ArrayList<EtapaCore> etapasTarget = new ArrayList<>(0);
         int n = aux.size();
         

@@ -1,12 +1,15 @@
 package view;
 
 import java.util.ArrayList;
+import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import model.projeto.Projeto;
 
 public class FormAbrirProjeto extends javax.swing.JFrame {
-    private ArrayList <Projeto> listaProjetos = new Projeto().get();
+
+    private ArrayList<Projeto> listaProjetos = new Projeto().get();
+
     public FormAbrirProjeto() {
         initComponents();
         configJanela();
@@ -24,9 +27,7 @@ public class FormAbrirProjeto extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setVisible(true);
-        ArrayList <String> value = new ArrayList();
-        value.add("String marota");
-        this.listProjetos = new JList<>(value.toArray(new String[0]));
+        //this.listProjetos = new JList<>(value.toArray(new String[0]));
     }
 
     @SuppressWarnings("unchecked")
@@ -38,13 +39,12 @@ public class FormAbrirProjeto extends javax.swing.JFrame {
         btnExcluir = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         listScroll = new javax.swing.JScrollPane();
-        listProjetos = new javax.swing.JList<>();
+        listProjetos = fillProjectTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(500, 350));
 
         painelAcoes.setPreferredSize(new java.awt.Dimension(1000, 700));
-        painelAcoes.setLayout(new java.awt.GridLayout());
+        painelAcoes.setLayout(new java.awt.GridLayout(1, 0));
 
         btnAbrir.setText("Abrir");
         btnAbrir.addActionListener(new java.awt.event.ActionListener() {
@@ -70,11 +70,6 @@ public class FormAbrirProjeto extends javax.swing.JFrame {
         });
         painelAcoes.add(btnCancelar);
 
-        listProjetos.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         listProjetos.setMaximumSize(new java.awt.Dimension(30, 80));
         listProjetos.setMinimumSize(new java.awt.Dimension(30, 80));
         listScroll.setViewportView(listProjetos);
@@ -107,14 +102,42 @@ public class FormAbrirProjeto extends javax.swing.JFrame {
         int item;
         item = listProjetos.getSelectedIndex();
         JOptionPane.showMessageDialog(null, item);
+//        listaProjetos.get(item)
+        JFrame newWindow = new FormInfoProjeto(listaProjetos.get(item));
+        newWindow.setVisible(true);
     }//GEN-LAST:event_btnAbrirActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void refreshJlist() {
+        listaProjetos = new Projeto().get();
+        String settings[] = new String[this.listaProjetos.size()];
+        int i = 0;
+        for (Projeto projeto : listaProjetos) {
+            settings[i++] = projeto.getNome();
+        }
+
+        listProjetos = new JList<>(settings);
+        listProjetos.setMaximumSize(new java.awt.Dimension(30, 80));
+        listProjetos.setMinimumSize(new java.awt.Dimension(30, 80));
+        listScroll.setViewportView(listProjetos);
+    }
+    
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        // TODO add your handling code here:
+       int index = listProjetos.getSelectedIndex();
+        if (index < 0) {
+            JOptionPane.showMessageDialog(null, "Selecione um projeto para excluir");
+            return;
+        }
+        if (JOptionPane.showConfirmDialog(this,
+                "Esta ação não pode ser desfeita e apagará as etapas cadastradas no projeto.\nContinuar mesmo assim?",
+                "Deseja Excluir este projeto?",
+                JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE) == JOptionPane.OK_OPTION) {
+            listaProjetos.get(index).delete();
+        }
+        refreshJlist();
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     /**
@@ -143,29 +166,25 @@ public class FormAbrirProjeto extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(FormAbrirProjeto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            FormAbrirProjeto  form = new FormAbrirProjeto();
+            FormAbrirProjeto form = new FormAbrirProjeto();
             form.setLocationRelativeTo(null);
             form.setVisible(true);
         });
     }
+
+    private JList fillProjectTable() {
+        listaProjetos = new Projeto().get();
+        String settings[] = new String[this.listaProjetos.size()];
+        int i = 0;
+        for (Projeto projeto : listaProjetos) {
+            settings[i++] = projeto.getNome();
+        }
+        return new JList<>(settings);
+    }
+    
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAbrir;
