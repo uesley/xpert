@@ -10,16 +10,20 @@ import model.IDAO;
 public class EtapaDAO implements IDAO<Etapa> {
 
     protected String table = "etapas";
-    private DBConnection database = new MySQLConnection();
+    private int projeto;
+    private String baseName = "xpert_project_";
+    private DBConnection database;
     private Etapa etapa;
 
-    public EtapaDAO(Etapa e) {
+    public EtapaDAO(Etapa e, int projeto) {
         etapa = e;
+        baseName += projeto;
+        database =new MySQLConnection(baseName);
     }
 
     @Override
     public void save() {
-
+        
         String f[] = new String[2];
         ArrayList<String> fields = new ArrayList();
         fields.add("nome");
@@ -72,13 +76,15 @@ public class EtapaDAO implements IDAO<Etapa> {
 
     @Override
     public Etapa find(int id) {
-        
+
+        System.out.println("baseName: "+baseName);
         ArrayList<String> result = database.find(table, id);
         try{
             mapToEtapa(etapa,result);
         }catch(NullPointerException ex){
-            etapa = new Etapa();
+            etapa = new Etapa(projeto);
         }
+        System.out.println(database.getLastQuery());
         return etapa;
     }
 
@@ -121,18 +127,18 @@ public class EtapaDAO implements IDAO<Etapa> {
     }
     
     private void mapToEtapa(Etapa e, ArrayList<String> linha){
-            etapa.setId(Integer.parseInt(linha.get(0)));
-            etapa.setNome(linha.get(1));
-            etapa.setDescricao(linha.get(2));
-            etapa.setDuracao_prevista(Integer.parseInt(linha.get(3)));
-            etapa.setDisponibilidade(Integer.parseInt(linha.get(4)) != 0);
-            etapa.setRealizado(Integer.parseInt(linha.get(5)) != 0);
-            etapa.setDuracao_real(Integer.parseInt(linha.get(6)));
-            etapa.setProjeto(Integer.parseInt(linha.get(7)));
+            e.setId(Integer.parseInt(linha.get(0)));
+            e.setNome(linha.get(1));
+            e.setDescricao(linha.get(2));
+            e.setDuracao_prevista(Integer.parseInt(linha.get(3)));
+            e.setDisponibilidade(Integer.parseInt(linha.get(4)) != 0);
+            e.setRealizado(Integer.parseInt(linha.get(5)) != 0);
+            e.setDuracao_real(Integer.parseInt(linha.get(6)));
+            e.setProjeto(Integer.parseInt(linha.get(7)));
     }
     
     private Etapa mapToEtapa(ArrayList<String> linha){
-            Etapa etapa = new Etapa();
+            Etapa etapa = new Etapa(projeto);
             etapa.setId(Integer.parseInt(linha.get(0)));
             etapa.setNome(linha.get(1));
             etapa.setDescricao(linha.get(2));

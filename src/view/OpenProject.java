@@ -8,7 +8,9 @@ import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import model.projeto.Projeto;
 
 public class OpenProject extends javax.swing.JFrame {
-    private ArrayList <Projeto> listaProjetos = new Projeto().get();
+
+    private ArrayList<Projeto> listaProjetos = new Projeto().get();
+
     public OpenProject() {
         initComponents();
         configJanela();
@@ -74,65 +76,69 @@ public class OpenProject extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(painelAcoes, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(listScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE))
-                .addContainerGap())
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(painelAcoes, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                        .addComponent(listScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE))
+                                .addContainerGap())
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(listScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(painelAcoes, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(listScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(painelAcoes, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(20, 20, 20))
         );
 
         pack();
     }// </editor-fold>  
-    private void refreshJlist()
-    {
+
+    private void refreshJlist() {
         listaProjetos = new Projeto().get();
         String settings[] = new String[this.listaProjetos.size()];
-        int i =0;
-        for (Projeto projeto : listaProjetos){
+        int i = 0;
+        for (Projeto projeto : listaProjetos) {
             settings[i++] = projeto.getNome();
         }
-        
+
         listProjetos = new JList<>(settings);
         listProjetos.setMaximumSize(new java.awt.Dimension(30, 80));
         listProjetos.setMinimumSize(new java.awt.Dimension(30, 80));
         listScroll.setViewportView(listProjetos);
     }
 
-    private void btnAbrirActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void btnAbrirActionPerformed(java.awt.event.ActionEvent evt) {
         int item;
         item = listProjetos.getSelectedIndex();
         JFrame newWindow = new OutroInfo(listaProjetos.get(item));
         newWindow.setVisible(true);
-    }                                        
+    }
 
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {                                            
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {
         dispose();
-    }                                           
+    }
 
-    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {                                           
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-        int index =listProjetos.getSelectedIndex();
-        if (index <0){
+        int index = listProjetos.getSelectedIndex();
+        if (index < 0) {
             JOptionPane.showMessageDialog(null, "Selecione um projeto para excluir");
             return;
         }
-        listaProjetos.get(index).delete();
+        if (JOptionPane.showConfirmDialog(this,
+                "Esta ação não pode ser desfeita e apagará as etapas cadastradas no projeto.\nContinuar mesmo assim?",
+                "Deseja Excluir este projeto?",
+                JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE) == JOptionPane.OK_OPTION) {
+            listaProjetos.get(index).delete();
+        }
         refreshJlist();
         listProjetos.repaint();
-    }   
-    
-    
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -160,7 +166,7 @@ public class OpenProject extends javax.swing.JFrame {
         }
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            OpenProject  form = new OpenProject();
+            OpenProject form = new OpenProject();
             form.setLocationRelativeTo(null);
             form.setVisible(true);
         });

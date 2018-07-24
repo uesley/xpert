@@ -26,5 +26,8 @@ public interface IProjeto {
     
     public void removeEtapa(int etapa_id);
     
+    public void export(String fileName);
+    
+    public void acquire(String fileName, String projectName);
     
 }

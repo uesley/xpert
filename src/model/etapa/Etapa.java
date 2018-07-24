@@ -20,8 +20,8 @@ public class Etapa implements IEtapa, IDAO<Etapa> {
     private int menor_tempo_fim;
     private EtapaDAO dao;
 
-    public Etapa() {
-        dao = new EtapaDAO(this);
+    public Etapa(int projeto) {
+        dao = new EtapaDAO(this, projeto);
     }
 
     public int getFolga() {
@@ -189,7 +189,7 @@ public class Etapa implements IEtapa, IDAO<Etapa> {
     }
     public EtapaCore convert()
     {
-        EtapaCore target = new EtapaCoreore(getId(),getNome(),getDuracao_prevista(),getDescricao(), getDuracao_real(), getRealizado(), getMenorTempoInicio(), getMenorTempoFim(), getFolga(),null);
+        EtapaCore target = new EtapaCore(getId(),getNome(),getDuracao_prevista(),getDescricao(), getDuracao_real(), getRealizado(), getMenorTempoInicio(), getMenorTempoFim(), getFolga(),null);
         return target;
     }
 }

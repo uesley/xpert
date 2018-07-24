@@ -92,7 +92,7 @@ public class Projeto implements IProjeto , IDAO<Projeto>{
     
     @Override
     public void removeEtapa(int etapa_id){
-        Etapa e = new Etapa();
+        Etapa e = new Etapa(id);
         e.setId(etapa_id);
         e.delete();
     }
@@ -119,4 +119,15 @@ public class Projeto implements IProjeto , IDAO<Projeto>{
         ProjetoCore target = new ProjetoCore(etapasTarget,getId(),getNome());
         return target;
     }
+
+    @Override
+    public void export(String fileName) {
+        dao.export(fileName);
+    }
+
+    @Override
+    public void acquire(String fileName, String projectName) {
+        dao.acquire(fileName, projectName);
+    }
+
 }
