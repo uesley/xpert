@@ -1,6 +1,7 @@
 package view;
 
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 
 /**
  *
@@ -75,7 +76,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menuCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadastrarActionPerformed
-        OpenProject form = new OpenProject (this, true);
+        JFrame form = new FormInserirProjeto(this, true);
     }//GEN-LAST:event_menuCadastrarActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed

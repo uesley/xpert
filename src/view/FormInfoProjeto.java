@@ -24,15 +24,16 @@ public class FormInfoProjeto extends javax.swing.JFrame {
     private Projeto projeto;
     private ArrayList<EtapaCore> etapas;
     private ProjetoCore projetoCore;
+    
     public FormInfoProjeto(Projeto p) {
         projeto = p;
+        System.out.println("p : "+p.getNome());
         projetoCore = projeto.convert();
         projetoCore.simular();
         projeto = projetoCore.convert();
         etapas = projetoCore.getEtapasDisponiveis();
         initComponents();
         configJanela();
-        
     }
     
     private void configJanela() {

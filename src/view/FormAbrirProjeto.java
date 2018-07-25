@@ -102,7 +102,6 @@ public class FormAbrirProjeto extends javax.swing.JFrame {
         int item;
         item = listProjetos.getSelectedIndex();
         JOptionPane.showMessageDialog(null, item);
-//        listaProjetos.get(item)
         JFrame newWindow = new FormInfoProjeto(listaProjetos.get(item));
         newWindow.setVisible(true);
     }//GEN-LAST:event_btnAbrirActionPerformed

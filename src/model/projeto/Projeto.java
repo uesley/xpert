@@ -105,6 +105,12 @@ public class Projeto implements IProjeto , IDAO<Projeto>{
         etapa.setProjeto(id);
         etapa.save();
     }
+    
+    public void updateEtapa(Etapa etapa) {
+        etapa.setProjeto(id);
+        etapa.update();
+    }
+
 
     @Override
     public void removeEtapa(Etapa etapa) {
@@ -119,7 +125,9 @@ public class Projeto implements IProjeto , IDAO<Projeto>{
     }
     public ProjetoCore convert()
     {   
+//        System.out.println("id: "+getId());
         ArrayList<Etapa> aux = getEtapas();
+        System.out.println("passou");
         ArrayList<EtapaCore> etapasTarget = new ArrayList<>(0);
         int n = aux.size();
         

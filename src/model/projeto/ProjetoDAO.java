@@ -45,6 +45,7 @@ class ProjetoDAO implements IDAO<Projeto> {
                 + "  `folga` INT NULL DEFAULT 0,\n"
                 + "  `menor_tempo_inicio` INT NULL DEFAULT 0,\n"
                 + "  `maior_tempo_fim` INT NULL DEFAULT 0,\n"
+                + "  `projeto` INT NOT NULL,\n"
                 + "  PRIMARY KEY (`id`))"
                 + "ENGINE = InnoDB;";
     }
@@ -57,10 +58,14 @@ class ProjetoDAO implements IDAO<Projeto> {
                 + "  INDEX `index2` (`dependente` ASC),"
                 + "  CONSTRAINT `fk_dependencias_1`"
                 + "    FOREIGN KEY (`dependente`)"
-                + "    REFERENCES `etapas` (`id`),"
+                + "    REFERENCES `etapas` (`id`)"
+                + "    ON DELETE CASCADE"
+                + "    ON UPDATE CASCADE,"
                 + "  CONSTRAINT `fk_dependencias_2`"
                 + "    FOREIGN KEY (`dependencia`)"
-                + "    REFERENCES `etapas` (`id`))"
+                + "    REFERENCES `etapas` (`id`)"
+                + "    ON DELETE CASCADE"
+                + "    ON UPDATE CASCADE)"
                 + "ENGINE = InnoDB;";
     }
 
@@ -111,6 +116,7 @@ class ProjetoDAO implements IDAO<Projeto> {
 
     public ArrayList<Etapa> getEtapas() {
 //        Etapa  = new EtapaDAO(new Etapa(projeto.getId()),projeto.getId());
+//System.out.println("projeto: "+projeto.getId());
         return new Etapa(projeto.getId()).get();
     }
 

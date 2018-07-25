@@ -185,12 +185,10 @@ public class ProjetoCore {
         targetProjeto.setNome(getNome());
         targetProjeto.setId(getIdentificacao());
         targetProjeto.setSituacao((float) getSituacao());
-        System.out.println("auauaaua");
         for (int c = 0; c < n; c++) {
-            targetProjeto.addEtapa(etapasVinculadas.get(c).convert(targetProjeto.getId()));
+            targetProjeto.updateEtapa(etapasVinculadas.get(c).convert(targetProjeto.getId()));
 //            targetProjeto.getEtapas().get(c).setProjeto(getIdentificacao());
         }
-        System.out.println("uihdaiussa");
         return targetProjeto;
     }
 }

@@ -53,6 +53,7 @@ public class MySQLConnection implements DBConnection {
         } catch (SQLException e) {
             System.out.println("BASE: "+ BASE);
             System.out.println("URL: "+ URL);
+            System.out.println("query: "+  lastQuery);
             System.out.println("As informações de conexão com o Banco estão desatualizadas");
             System.out.println(e.getMessage());
             System.exit(0);

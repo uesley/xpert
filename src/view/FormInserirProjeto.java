@@ -1,6 +1,12 @@
 package view;
 
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.etapa.Etapa;
+import model.projeto.Projeto;
+import xPertCore.EtapaCore;
+import xPertCore.ProjetoCore;
 
 public class FormInserirProjeto extends javax.swing.JFrame {
 
@@ -54,7 +60,6 @@ public class FormInserirProjeto extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Inserir Projeto");
-        setPreferredSize(new java.awt.Dimension(1000, 700));
 
         lblProjeto.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblProjeto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -86,6 +91,11 @@ public class FormInserirProjeto extends javax.swing.JFrame {
         painelAcoes.setLayout(new java.awt.GridLayout(1, 0));
 
         btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
         painelAcoes.add(btnSalvar);
 
         btnSimular.setText("Simular");
@@ -247,6 +257,17 @@ public class FormInserirProjeto extends javax.swing.JFrame {
     private void btnInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserirActionPerformed
         DefaultTableModel dtmEtapas = (DefaultTableModel) jTProjeto.getModel();
         Object[] dados = {count, txtEtapa.getText(), txtDuracao.getText(), txtDependencias.getText()};
+        if (txtDependencias.getText().length() > 0){
+            String[] dp = txtDependencias.getText().split(",");
+            for( String d : dp){
+                int i = Integer.parseInt(d);
+                if (i >= count || i <= 0){
+                    JOptionPane.showMessageDialog(null, "Erro ao tentar adicionar dependencia "+i,"ERRO",JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            }
+        }
+        
         dtmEtapas.addRow(dados);
         //jTProjeto.
         count++;
@@ -259,6 +280,35 @@ public class FormInserirProjeto extends javax.swing.JFrame {
     private void txtDuracaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDuracaoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDuracaoActionPerformed
+
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        ArrayList<EtapaCore> etapas = new ArrayList();
+        Projeto projeto = new Projeto();
+        projeto.setNome(txtProjeto.getText());
+        projeto.setSimulado(false);
+        projeto.setSituacao(0.0f);
+        projeto.save();
+        
+        int[] dependences;
+        for (int linha = 0; linha < jTProjeto.getRowCount(); linha++){
+            Etapa e = new Etapa(projeto.getId());
+            e.setNome(jTProjeto.getModel().getValueAt(linha, 1).toString());
+            e.setDuracao_prevista(Integer.parseInt(jTProjeto.getModel().getValueAt(linha, 2).toString()));
+            e.save();
+            if (jTProjeto.getModel().getValueAt(linha, 3).toString().length() > 0){
+                String[] dp = jTProjeto.getModel().getValueAt(linha, 3).toString().split(",");
+                for( String d : dp){
+                    int i = Integer.parseInt(d);
+                    if (i >= count || i < 0){
+                        JOptionPane.showMessageDialog(null, "Erro ao tentar adicionar dependencia "+i);
+                        continue;
+                    }
+                    e.addDependencia(i+1);
+                }
+            }
+        }
+        JOptionPane.showMessageDialog(this, "Projeto Salvo com sucesso!","Sucesso",JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_btnSalvarActionPerformed
 
     
     /**
