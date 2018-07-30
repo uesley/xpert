@@ -131,10 +131,7 @@ public class ProjetoCore {
     }
 
     public int getEtapasAFazer() {
-        int a = etapasVinculadas.size();
-        int b = getEtapasConcluidas().size();
-        System.out.println("a - b  = "+a +"- "+b+" = " +(a-b));
-        return a - b;
+        return etapasVinculadas.size() - getEtapasConcluidas().size();
     }
 
     public void simular() {

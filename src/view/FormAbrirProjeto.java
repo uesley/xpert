@@ -42,7 +42,6 @@ public class FormAbrirProjeto extends javax.swing.JFrame {
         btnCancelar = new javax.swing.JButton();
         listScroll = new javax.swing.JScrollPane();
         listProjetos = fillProjectTable();
-        btnImportar = new javax.swing.JButton();
         btnExportar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -78,13 +77,6 @@ public class FormAbrirProjeto extends javax.swing.JFrame {
         listProjetos.setMinimumSize(new java.awt.Dimension(30, 80));
         listScroll.setViewportView(listProjetos);
 
-        btnImportar.setText("importar");
-        btnImportar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnImportarActionPerformed(evt);
-            }
-        });
-
         btnExportar.setText("exportar");
         btnExportar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,8 +95,6 @@ public class FormAbrirProjeto extends javax.swing.JFrame {
                     .addComponent(listScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 495, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnExportar, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnImportar, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -116,9 +106,7 @@ public class FormAbrirProjeto extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(painelAcoes, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnExportar)
-                    .addComponent(btnImportar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnExportar)
                 .addContainerGap())
         );
 
@@ -194,25 +182,6 @@ public class FormAbrirProjeto extends javax.swing.JFrame {
                 JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnExportarActionPerformed
 
-    private void btnImportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportarActionPerformed
-        JFileChooser chooser = new JFileChooser();
-        FileNameExtensionFilter filter = new FileNameExtensionFilter(
-                "xpert Files", "xpert");
-        chooser.setFileFilter(filter);
-        String nameFile = "";
-        int returnVal = chooser.showOpenDialog(null);
-        if(returnVal != JFileChooser.APPROVE_OPTION) 
-            return;
-        nameFile = chooser.getSelectedFile().getAbsolutePath();
-        System.out.println("You chose to open this file: " + nameFile);
-        String projectName = JOptionPane.showInputDialog(null,
-                "Entre com um nome para o projeto",
-                "",
-                JOptionPane.INFORMATION_MESSAGE);
-        new Projeto().acquire(nameFile, projectName);
-        refreshJlist();
-    }//GEN-LAST:event_btnImportarActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -264,7 +233,6 @@ public class FormAbrirProjeto extends javax.swing.JFrame {
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnExportar;
-    private javax.swing.JButton btnImportar;
     private javax.swing.JList<String> listProjetos;
     private javax.swing.JScrollPane listScroll;
     private javax.swing.JPanel painelAcoes;

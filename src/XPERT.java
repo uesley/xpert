@@ -5,11 +5,14 @@ import model.etapa.Etapa;
 import model.projeto.Projeto;
 import view.FormAbrirProjeto;
 import view.MenuPrincipal;
+import xPertCore.EtapaCore;
 
 public class XPERT {
 
     public static void main(String[] args) {
-            
+         
+        
+        
         JFrame inicio = new MenuPrincipal();
         inicio.setVisible(true);
 //         testeInsertEtapa("Novo Nome", "uma descricao qualquer", 12);

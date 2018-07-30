@@ -15,7 +15,7 @@ public class EtapaCore {
 	private int menorTempoDeFim;
 	private int maiorTempoDeFolga;
         private String descricao;
-
+        
         public String getDescricao() {
             return descricao;
         }
@@ -126,7 +126,7 @@ public class EtapaCore {
         for(int c=0;c<n;c++)
         {
             if(!listaDeDependencias.get(c).isRealizado())
-                isAvaliable=false;
+                isAvaliable = false;
         }
         
         return isAvaliable; 
@@ -165,6 +165,10 @@ public class EtapaCore {
             return targetEtapa;
         }
 	
+        public String toString()
+        {
+            return "Id: "+getIdentificacao()+"\nNome:"+getNome()+"\nRealizado? "+isRealizado()+"\n Disponivel? "+isDisponivel();
+        }
 	
 	
 }

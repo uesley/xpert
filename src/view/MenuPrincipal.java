@@ -1,7 +1,11 @@
 package view;
 
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import model.projeto.Projeto;
 
 /**
  *
@@ -28,11 +32,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menuCadastrar = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        menuAbrirProjeto = new javax.swing.JMenuItem();
+        menuImportarProjeto = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1000, 700));
         setResizable(false);
 
         jMenu1.setText("Projetos");
@@ -45,13 +49,21 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(menuCadastrar);
 
-        jMenuItem2.setText("Abrir Projeto");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        menuAbrirProjeto.setText("Abrir Projeto");
+        menuAbrirProjeto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                menuAbrirProjetoActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        jMenu1.add(menuAbrirProjeto);
+
+        menuImportarProjeto.setText("Importar Projeto");
+        menuImportarProjeto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuImportarProjetoActionPerformed(evt);
+            }
+        });
+        jMenu1.add(menuImportarProjeto);
 
         jMenuBar1.add(jMenu1);
 
@@ -79,9 +91,27 @@ public class MenuPrincipal extends javax.swing.JFrame {
         JFrame form = new FormInserirProjeto(this, true);
     }//GEN-LAST:event_menuCadastrarActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void menuAbrirProjetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAbrirProjetoActionPerformed
         FormAbrirProjeto form = new FormAbrirProjeto (this, true);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_menuAbrirProjetoActionPerformed
+
+    private void menuImportarProjetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuImportarProjetoActionPerformed
+        JFileChooser chooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                "xpert Files", "xpert");
+        chooser.setFileFilter(filter);
+        String nameFile = "";
+        int returnVal = chooser.showOpenDialog(null);
+        if(returnVal != JFileChooser.APPROVE_OPTION) 
+            return;
+        nameFile = chooser.getSelectedFile().getAbsolutePath();
+        String projectName = JOptionPane.showInputDialog(null,
+                "Entre com um nome para o projeto",
+                "",
+                JOptionPane.INFORMATION_MESSAGE);
+        new Projeto().acquire(nameFile, projectName);
+        JOptionPane.showMessageDialog(null, "Projeto Importadp com sucesso","Sucesso",JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_menuImportarProjetoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -122,7 +152,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem menuAbrirProjeto;
     private javax.swing.JMenuItem menuCadastrar;
+    private javax.swing.JMenuItem menuImportarProjeto;
     // End of variables declaration//GEN-END:variables
 }
