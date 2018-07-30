@@ -37,7 +37,7 @@ public class DumpMySQL {
             String usuario,
             String senha,
             String base,
-            String... tabelas ) throws IOException {
+            String... tabelas ) throws IOException { 
         // prepara o comando
         StringBuilder sbComando = new StringBuilder( "mysqldump" );
         sbComando.append( " -u " );

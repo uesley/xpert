@@ -127,7 +127,6 @@ public class Projeto implements IProjeto , IDAO<Projeto>{
     {   
 //        System.out.println("id: "+getId());
         ArrayList<Etapa> aux = getEtapas();
-        System.out.println("passou");
         ArrayList<EtapaCore> etapasTarget = new ArrayList<>(0);
         int n = aux.size();
         

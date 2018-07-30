@@ -131,10 +131,14 @@ public class ProjetoCore {
     }
 
     public int getEtapasAFazer() {
-        return etapasVinculadas.size() - getEtapasConcluidas().size();
+        int a = etapasVinculadas.size();
+        int b = getEtapasConcluidas().size();
+        System.out.println("a - b  = "+a +"- "+b+" = " +(a-b));
+        return a - b;
     }
 
     public void simular() {
+       
         if (!getSimulado()) {
             int time = 0;
             ArrayList<EtapaCore> abertos = new ArrayList<EtapaCore>(0);
@@ -187,7 +191,6 @@ public class ProjetoCore {
         targetProjeto.setSituacao((float) getSituacao());
         for (int c = 0; c < n; c++) {
             targetProjeto.updateEtapa(etapasVinculadas.get(c).convert(targetProjeto.getId()));
-//            targetProjeto.getEtapas().get(c).setProjeto(getIdentificacao());
         }
         return targetProjeto;
     }

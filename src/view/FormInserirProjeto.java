@@ -308,6 +308,7 @@ public class FormInserirProjeto extends javax.swing.JFrame {
             }
         }
         JOptionPane.showMessageDialog(this, "Projeto Salvo com sucesso!","Sucesso",JOptionPane.INFORMATION_MESSAGE);
+        this.dispose();
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     

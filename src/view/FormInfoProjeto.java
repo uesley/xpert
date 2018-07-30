@@ -5,9 +5,9 @@
  */
 package view;
 
+import java.awt.Dimension;
 import java.util.ArrayList;
 import javax.swing.JTable;
-import model.etapa.Etapa;
 import model.projeto.Projeto;
 import xPertCore.EtapaCore;
 import xPertCore.ProjetoCore;
@@ -27,7 +27,6 @@ public class FormInfoProjeto extends javax.swing.JFrame {
     
     public FormInfoProjeto(Projeto p) {
         projeto = p;
-        System.out.println("p : "+p.getNome());
         projetoCore = projeto.convert();
         projetoCore.simular();
         projeto = projetoCore.convert();
@@ -39,8 +38,10 @@ public class FormInfoProjeto extends javax.swing.JFrame {
     private void configJanela() {
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setTitle("Projeto: "+projeto.getNome());
-        this.setLocationRelativeTo(null);
+        //this.setLocationRelativeTo(null);
         this.setResizable(false);
+        this.setMaximumSize(new Dimension(1000, 700));
+        this.setMinimumSize(new Dimension(1000, 700));
         this.setVisible(true);
     }
 
@@ -111,7 +112,6 @@ public class FormInfoProjeto extends javax.swing.JFrame {
         jLabelProfundidadeTotal1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1000, 700));
 
         jLabelNomeDoProjeto.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabelNomeDoProjeto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

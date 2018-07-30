@@ -25,7 +25,7 @@ public class EtapaDAO implements IDAO<Etapa> {
 
     @Override
     public void save() {
-        
+
         String f[] = new String[2];
         ArrayList<String> fields = new ArrayList();
         fields.add("nome");
@@ -57,18 +57,18 @@ public class EtapaDAO implements IDAO<Etapa> {
         fields.add("realizado");
         fields.add("folga");
         fields.add("projeto");
-        
+
         ArrayList<String> values = new ArrayList<>();
         values.add(etapa.getNome());
         values.add(etapa.getDescricao());
         values.add(Integer.toString(etapa.getDuracao_prevista()));
         values.add(Integer.toString(etapa.getDuracao_real()));
-        values.add(Integer.toString(etapa.getDisponibilidade()?1:0));
-        values.add(Integer.toString(etapa.getRealizado()?1:0));
+        values.add(Integer.toString(etapa.getDisponibilidade() ? 1 : 0));
+        values.add(Integer.toString(etapa.getRealizado() ? 1 : 0));
         values.add(Integer.toString(etapa.getFolga()));
         values.add(Integer.toString(etapa.getProjeto()));
-        
-        database.update( 
+
+        database.update(
                 table,
                 etapa.getId(),
                 fields.toArray(new String[0]),
@@ -83,9 +83,9 @@ public class EtapaDAO implements IDAO<Etapa> {
     @Override
     public Etapa find(int id) {
         ArrayList<String> result = database.find(table, id);
-        try{
-            mapToEtapa(etapa,result);
-        }catch(NullPointerException ex){
+        try {
+            mapToEtapa(etapa, result);
+        } catch (NullPointerException ex) {
             etapa = new Etapa(projeto);
         }
         return etapa;
@@ -96,83 +96,81 @@ public class EtapaDAO implements IDAO<Etapa> {
         ArrayList<Etapa> etapas = new ArrayList<>();
         ArrayList<ArrayList<String>> result = database.get(table);
         Iterator<ArrayList<String>> linha_i = result.iterator();
-        while(linha_i.hasNext()){
+        while (linha_i.hasNext()) {
             ArrayList<String> linha = linha_i.next();
             etapas.add(mapToEtapa(linha));
         }
         return etapas;
     }
 
-
-    public void adicionarDependencias(int dependencia){
-        String[] fields = {"dependente","dependencia"};
+    public void adicionarDependencias(int dependencia) {
+        String[] fields = {"dependente", "dependencia"};
         String[] values = {Integer.toString(etapa.getId()), Integer.toString(dependencia)};
         database.insert("dependencias", fields, values);
     }
-    
-    public void removeDependencia(int dependencia){
+
+    public void removeDependencia(int dependencia) {
         String delete = "DELETE FROM dependencias "
-                + "WHERE dependencia=" + dependencia+" and "
-                + "dependente="+etapa.getId();
+                + "WHERE dependencia=" + dependencia + " and "
+                + "dependente=" + etapa.getId();
         database.command(delete);
     }
-    
-    private void mapToEtapa(Etapa e, ArrayList<String> linha){
-            e.setId(Integer.parseInt(linha.get(0)));
-            e.setNome(linha.get(1));
-            e.setDescricao(linha.get(2));
-            e.setDuracao_prevista(Integer.parseInt(linha.get(3)));
-            e.setDisponibilidade(Integer.parseInt(linha.get(4)) != 0);
-            e.setRealizado(Integer.parseInt(linha.get(5)) != 0);
-            e.setDuracao_real(Integer.parseInt(linha.get(6)));
-            e.setFolga(Integer.parseInt(linha.get(7)));
-            e.setMenorTempoInicio(Integer.parseInt(linha.get(8)));
-            e.setMenorTempoFim(Integer.parseInt(linha.get(9)));
-            e.setProjeto(Integer.parseInt(linha.get(10)));
+
+    private void mapToEtapa(Etapa e, ArrayList<String> linha) {
+        e.setId(Integer.parseInt(linha.get(0)));
+        e.setNome(linha.get(1));
+        e.setDescricao(linha.get(2));
+        e.setDuracao_prevista(Integer.parseInt(linha.get(3)));
+        e.setDisponibilidade(Integer.parseInt(linha.get(4)) != 0);
+        e.setRealizado(Integer.parseInt(linha.get(5)) != 0);
+        e.setDuracao_real(Integer.parseInt(linha.get(6)));
+        e.setFolga(Integer.parseInt(linha.get(7)));
+        e.setMenorTempoInicio(Integer.parseInt(linha.get(8)));
+        e.setMenorTempoFim(Integer.parseInt(linha.get(9)));
+        e.setProjeto(Integer.parseInt(linha.get(10)));
     }
-    
-    private Etapa mapToEtapa(ArrayList<String> linha){
-            System.out.println(linha.get(10));
-            Etapa etapa = new Etapa(Integer.parseInt(linha.get(10)));
-            System.out.println("ok");
-            etapa.setId(Integer.parseInt(linha.get(0)));
-            etapa.setNome(linha.get(1));
-            etapa.setDescricao(linha.get(2));
-            etapa.setDuracao_prevista(Integer.parseInt(linha.get(3)));
-            etapa.setDisponibilidade(Integer.parseInt(linha.get(4)) != 0);
-            etapa.setRealizado(Integer.parseInt(linha.get(5)) != 0);
-            etapa.setDuracao_real(Integer.parseInt(linha.get(6)));
-            etapa.setFolga(Integer.parseInt(linha.get(7)));
-            etapa.setMenorTempoInicio(Integer.parseInt(linha.get(8)));
-            etapa.setMenorTempoFim(Integer.parseInt(linha.get(9)));
-            etapa.setProjeto(Integer.parseInt(linha.get(10)));
-            return etapa;
+
+    private Etapa mapToEtapa(ArrayList<String> linha) {
+        System.out.println(linha.get(10));
+        Etapa etapa = new Etapa(Integer.parseInt(linha.get(10)));
+        etapa.setId(Integer.parseInt(linha.get(0)));
+        etapa.setNome(linha.get(1));
+        etapa.setDescricao(linha.get(2));
+        etapa.setDuracao_prevista(Integer.parseInt(linha.get(3)));
+        etapa.setDisponibilidade(Integer.parseInt(linha.get(4)) != 0);
+        etapa.setRealizado(Integer.parseInt(linha.get(5)) != 0);
+        etapa.setDuracao_real(Integer.parseInt(linha.get(6)));
+        etapa.setFolga(Integer.parseInt(linha.get(7)));
+        etapa.setMenorTempoInicio(Integer.parseInt(linha.get(8)));
+        etapa.setMenorTempoFim(Integer.parseInt(linha.get(9)));
+        etapa.setProjeto(Integer.parseInt(linha.get(10)));
+        return etapa;
     }
-    
-    public ArrayList<Etapa> getDependencias(){
+
+    public ArrayList<Etapa> getDependencias() {
         ArrayList<Etapa> etapas = new ArrayList<>();
         String select = "SELECT "
                 + "id,nome,descricao, duracao_prevista,disponibilidade,realizado,duracao_real,projeto"
                 + " FROM dependencias inner join etapas on (dependencia = id)"
-                + " where dependente="+etapa.getId();
+                + " where dependente=" + etapa.getId();
         ArrayList<ArrayList<String>> result = database.query(select);
         Iterator<ArrayList<String>> linha_i = result.iterator();
-        while(linha_i.hasNext()){
+        while (linha_i.hasNext()) {
             ArrayList<String> linha = linha_i.next();
             etapas.add(mapToEtapa(linha));
         }
         return etapas;
     }
-    
-    public int[] getDependenciasID(){
-        String select = "SELECT dependencia as id FROM dependencias where dependente="+etapa.getId();
+
+    public int[] getDependenciasID() {
+        String select = "SELECT dependencia as id FROM dependencias where dependente=" + etapa.getId();
         ArrayList<ArrayList<String>> resultBD = database.query(select);
         int result[] = new int[resultBD.size()];
-        int i=0;
-        for(ArrayList<String> row : resultBD)
+        int i = 0;
+        for (ArrayList<String> row : resultBD) {
             result[i++] = (Integer.parseInt(row.get(0)));
+        }
         return result;
     }
-    
-    
+
 }
