@@ -204,9 +204,25 @@ public class ProjetoCore {
     public int[] getProfundidades()
     {
         int profundidades[] = new int[3];
+        int n = etapasVinculadas.size();
+        int menorProfundidadeAtual,maiorProfundidadeAtual,profundidadeTotal;
         
-        //a fazer
-    
+        ArrayList<EtapaCore> roots = new ArrayList<EtapaCore>(0);
+        
+        for(int c=0;c<n;c++)
+            if(etapasVinculadas.get(c).getListaDeDependencias().size()==0)
+                roots.add(etapasVinculadas.get(c));
+        
+        n = roots.size();
+        menorProfundidadeAtual=65356;
+        maiorProfundidadeAtual=0;
+        profundidadeTotal=0;
+      
+        for(int c=0;c<n;c++)
+        {
+            //A fazer..
+        }
+        
         return profundidades;
     }
 
