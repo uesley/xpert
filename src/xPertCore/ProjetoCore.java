@@ -116,6 +116,28 @@ public class ProjetoCore {
         return etapasDisponiveis;
 
     }
+    public int getEtapasAtrasadas()
+    {
+        int n = etapasVinculadas.size();
+        int ct=0;
+        for(int c=0;c<n;c++)
+        {
+            if(etapasVinculadas.get(c).isAtrasada())
+                ct++;
+        }
+        return ct;
+    }
+    public int getEtapasCriticas()
+    {
+        int n = etapasVinculadas.size();
+        int ct=0;
+        for(int c=0;c<n;c++)
+        {
+            if(etapasVinculadas.get(c).isCritica())
+                ct++;
+        }
+        return ct;
+    }
 
     public ArrayList<EtapaCore> getEtapasConcluidas() {
         int n = etapasVinculadas.size();
@@ -178,6 +200,14 @@ public class ProjetoCore {
 
     public void concluirEtapaVinculada(int idEtapa, int tempoGasto) {
         getEtapa(idEtapa).concluirEtapa(tempoGasto);
+    }
+    public int[] getProfundidades()
+    {
+        int profundidades[] = new int[3];
+        
+        //a fazer
+    
+        return profundidades;
     }
 
     public Projeto convert() {
