@@ -160,6 +160,7 @@ public class ProjetoCore {
        
         if (!getSimulado()) {
             int time = 0;
+            int depth = 0;
             ArrayList<EtapaCore> abertos = new ArrayList<EtapaCore>(0);
 
             while (getEtapasAFazer() > 0) {
@@ -172,6 +173,7 @@ public class ProjetoCore {
                     abertos.get(c).setMenorTempoDeIncio(time);
                     abertos.get(c).setMenorTempoDeFim(abertos.get(c).getMenorTempoDeIncio() + abertos.get(c).getTempoDeDuracaoPrevista());
                     abertos.get(c).setRealizado(true);
+                    abertos.get(c).setProfundidade(depth);
 
                     if (abertos.get(c).getMenorTempoDeFim() > maiorTempofinal) {
                         maiorTempofinal = abertos.get(c).getMenorTempoDeFim();
@@ -183,6 +185,7 @@ public class ProjetoCore {
                 }
 
                 time = maiorTempofinal;
+                depth++;
 
             }
 
@@ -204,24 +207,55 @@ public class ProjetoCore {
     public int[] getProfundidades()
     {
         int profundidades[] = new int[3];
+        ArrayList<EtapaCore> aux = new ArrayList<EtapaCore>(0);
+        int maior = 0,menor = 0;
+        boolean primeiro = true;
+        aux = getEtapasDisponiveis();
+        
+        while(!aux.isEmpty())
+        {
+            int depth = aux.get(0).getProfundidade();
+            if(primeiro)
+            {
+                maior = menor = depth;
+                primeiro = false;
+            }
+            else
+            {   
+                if(depth > maior)
+                {
+                    maior = depth;
+                }
+                
+                if(depth < menor)
+                {
+                    menor = depth;
+                }
+            }
+            aux.remove(0);
+        }
+        
+        profundidades[0] = menor;
+        profundidades[1] = maior;
+        primeiro = true;
+        
         int n = etapasVinculadas.size();
-        int menorProfundidadeAtual,maiorProfundidadeAtual,profundidadeTotal;
         
-        ArrayList<EtapaCore> roots = new ArrayList<EtapaCore>(0);
-        
-        for(int c=0;c<n;c++)
-            if(etapasVinculadas.get(c).getListaDeDependencias().size()==0)
-                roots.add(etapasVinculadas.get(c));
-        
-        n = roots.size();
-        menorProfundidadeAtual=65356;
-        maiorProfundidadeAtual=0;
-        profundidadeTotal=0;
-      
         for(int c=0;c<n;c++)
         {
-            //A fazer..
+            if(primeiro)
+            {
+                maior = etapasVinculadas.get(c).getProfundidade();
+                primeiro = false;
+            }
+            else
+            {
+                if(etapasVinculadas.get(c).getProfundidade() > maior)
+                    maior = etapasVinculadas.get(c).getProfundidade();
+            }
         }
+        
+        profundidades[2] = maior;
         
         return profundidades;
     }

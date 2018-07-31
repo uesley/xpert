@@ -15,7 +15,16 @@ public class EtapaCore {
 	private int menorTempoDeFim;
 	private int maiorTempoDeFolga;
         private String descricao;
+        private int profundidade;
         
+        public int getProfundidade()
+        {
+            return profundidade;
+        }
+        public void setProfundidade(int p)
+        {
+            profundidade = p;
+        }
         public String getDescricao() {
             return descricao;
         }
@@ -32,6 +41,7 @@ public class EtapaCore {
 		setTempoDeDuracaoPrevista(ETA);
 		setRealizado(false);
 		this.listaDeDependencias = listaDeDependencias;
+                setProfundidade(-1);
 	}
         public EtapaCore(int idEtapa,String nomeEtapa,int ETA,String descricao,int tempoDeDuracaoReal,boolean realizado,int menorTempoDeInicio,int menorTempoDeFim,int maiorTempoDeFolga,ArrayList<EtapaCore> listaDeDependencias)
 	{
@@ -46,6 +56,7 @@ public class EtapaCore {
                 setMenorTempoDeFim(menorTempoDeFim);
                 setMaiorTempoDeFolga(maiorTempoDeFolga);
 		this.listaDeDependencias = listaDeDependencias;
+                setProfundidade(-1);
 	}
 
 	public int getIdentificacao() {
