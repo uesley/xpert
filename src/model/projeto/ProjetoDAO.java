@@ -46,6 +46,7 @@ class ProjetoDAO implements IDAO<Projeto> {
                 + "  `menor_tempo_inicio` INT NULL DEFAULT 0,\n"
                 + "  `maior_tempo_fim` INT NULL DEFAULT 0,\n"
                 + "  `projeto` INT NOT NULL,\n"
+                + "  `profundidade` INT NULL DEFAULT 0,"
                 + "  PRIMARY KEY (`id`))"
                 + "ENGINE = InnoDB;";
     }

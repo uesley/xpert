@@ -22,7 +22,7 @@ public class MySQLConnection implements DBConnection {
     private String HOST = "localhost";
     private String PORT = "3306";
     private String USER = "root";
-    private String PASS = "?R00t_bd!";
+    private String PASS = "";
     private String BASE = "xpert";
     private String DRIVER = "com.mysql.cj.jdbc.Driver";
     private String PARAMETERS = "?useTimezone=true&serverTimezone=UTC&autoReconnect=true&useSSL=false";

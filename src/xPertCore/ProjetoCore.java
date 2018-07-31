@@ -196,6 +196,7 @@ public class ProjetoCore {
             }
             setETA(time);
             situacao = 0;
+            setSimulado(true);
         } else {
             System.out.println("Projeto foi previamente simulado");
         }
@@ -265,6 +266,7 @@ public class ProjetoCore {
         int n = etapasVinculadas.size();
         targetProjeto.setNome(getNome());
         targetProjeto.setId(getIdentificacao());
+        targetProjeto.setSimulado(getSimulado());
         targetProjeto.setSituacao((float) getSituacao());
         for (int c = 0; c < n; c++) {
             targetProjeto.updateEtapa(etapasVinculadas.get(c).convert(targetProjeto.getId()));

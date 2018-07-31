@@ -57,6 +57,7 @@ public class EtapaDAO implements IDAO<Etapa> {
         fields.add("realizado");
         fields.add("folga");
         fields.add("projeto");
+        fields.add("profundidade");
 
         ArrayList<String> values = new ArrayList<>();
         values.add(etapa.getNome());
@@ -67,6 +68,7 @@ public class EtapaDAO implements IDAO<Etapa> {
         values.add(Integer.toString(etapa.getRealizado() ? 1 : 0));
         values.add(Integer.toString(etapa.getFolga()));
         values.add(Integer.toString(etapa.getProjeto()));
+        values.add(Integer.toString(etapa.getProfundidade()));
 
         database.update(
                 table,
@@ -128,6 +130,7 @@ public class EtapaDAO implements IDAO<Etapa> {
         e.setMenorTempoInicio(Integer.parseInt(linha.get(8)));
         e.setMenorTempoFim(Integer.parseInt(linha.get(9)));
         e.setProjeto(Integer.parseInt(linha.get(10)));
+        e.setProfundidade(Integer.parseInt(linha.get(11)));
     }
 
     private Etapa mapToEtapa(ArrayList<String> linha) {
@@ -144,6 +147,7 @@ public class EtapaDAO implements IDAO<Etapa> {
         etapa.setMenorTempoInicio(Integer.parseInt(linha.get(8)));
         etapa.setMenorTempoFim(Integer.parseInt(linha.get(9)));
         etapa.setProjeto(Integer.parseInt(linha.get(10)));
+        etapa.setProfundidade(Integer.parseInt(linha.get(11)));
         return etapa;
     }
 
