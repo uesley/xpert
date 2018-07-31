@@ -8,7 +8,7 @@ import xPertCore.EtapaCore;
 import xPertCore.ProjetoCore;
 
 
-public class Projeto implements IProjeto , IDAO<Projeto>{
+public class Projeto implements IDAO<Projeto>{
     
   private int id;  
   private String nome;
@@ -36,71 +36,55 @@ public class Projeto implements IProjeto , IDAO<Projeto>{
     public void setSimulado(boolean simulado) {
         this.simulado = simulado;
     }
-  
-  
-  
-  @Override
+
     public int getId() {
         return id;
     }
 
-    @Override
     public void setId(int id) {
         this.id = id;
     }
-  
-    @Override
+
     public String getNome() {
         return nome;
     }
 
-    @Override
     public void setNome(String nome) {
         this.nome = nome;
     }
 
-    @Override
     public float getSituacao() {
         return situacao;
     }
 
-    @Override
     public void setSituacao(float situacao) {
         this.situacao = situacao;
     }
 
-    @Override
     public void save() {
         dao.save();
     }
 
-    @Override
     public void update() {
         dao.update();
     }
 
-    @Override
     public void delete() {
         dao.delete();
     }
-
-    @Override
+    
     public Projeto find(int id) {
         return dao.find(id);
     }
 
-    @Override
     public ArrayList<Projeto> get() {
         return dao.get();
     }
 
-    @Override
     public ArrayList<Etapa> getEtapas() {
         return dao.getEtapas();
     }
     
-
-    @Override
     public void addEtapa(Etapa etapa) {
         etapa.setProjeto(id);
         etapa.save();
@@ -111,13 +95,10 @@ public class Projeto implements IProjeto , IDAO<Projeto>{
         etapa.update();
     }
 
-
-    @Override
     public void removeEtapa(Etapa etapa) {
         etapa.delete();
     }
     
-    @Override
     public void removeEtapa(int etapa_id){
         Etapa e = new Etapa(id);
         e.setId(etapa_id);
@@ -149,12 +130,10 @@ public class Projeto implements IProjeto , IDAO<Projeto>{
         return target;
     }
 
-    @Override
     public void export(String fileName) {
         dao.export(fileName);
     }
 
-    @Override
     public void acquire(String fileName, String projectName) {
         dao.acquire(fileName, projectName);
     }

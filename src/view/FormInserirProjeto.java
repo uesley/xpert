@@ -6,10 +6,8 @@ import javax.swing.table.DefaultTableModel;
 import model.etapa.Etapa;
 import model.projeto.Projeto;
 import xPertCore.EtapaCore;
-import xPertCore.ProjetoCore;
 
 public class FormInserirProjeto extends javax.swing.JFrame {
-
     private int count = 1;
     public FormInserirProjeto() {
         initComponents();
@@ -58,6 +56,8 @@ public class FormInserirProjeto extends javax.swing.JFrame {
         painelTabela = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTProjeto = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        txtDescricao = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Inserir Projeto");
@@ -199,15 +199,30 @@ public class FormInserirProjeto extends javax.swing.JFrame {
             jTProjeto.getColumnModel().getColumn(3).setResizable(false);
         }
 
+        jLabel1.setText("Descrição");
+
         javax.swing.GroupLayout painelTabelaLayout = new javax.swing.GroupLayout(painelTabela);
         painelTabela.setLayout(painelTabelaLayout);
         painelTabelaLayout.setHorizontalGroup(
             painelTabelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 900, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 900, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(painelTabelaLayout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 561, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         painelTabelaLayout.setVerticalGroup(
             painelTabelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 536, Short.MAX_VALUE)
+            .addGroup(painelTabelaLayout.createSequentialGroup()
+                .addGap(4, 4, 4)
+                .addGroup(painelTabelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -307,34 +322,47 @@ public class FormInserirProjeto extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnSalvarActionPerformed
 
+
+    
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
         int selected = jTProjeto.getSelectedRow();
-        if (JOptionPane.showConfirmDialog(null, 
+        if (JOptionPane.showConfirmDialog(this, 
                 "Remover esta etapa removerá tadas as etapas que dependem dela. Continuar?",
                 "Confirmar operação",
                 JOptionPane.OK_CANCEL_OPTION,
                 JOptionPane.WARNING_MESSAGE) == JOptionPane.CANCEL_OPTION)
             return;
-        int rm[];
-        count--;
-        for(int i = 0 ; i < jTProjeto.getRowCount(); i++){
-            JOptionPane.showMessageDialog(null, jTProjeto.getValueAt(i, 3).toString());
-            String dep[] = jTProjeto.getValueAt(i, 3).toString().split(",");
-            for (String dep1 : dep) {
-                if (dep1.equals(Integer.toString(selected))) {
-                    System.out.println("kfahfhsd");
-                    ((DefaultTableModel) jTProjeto.getModel()).removeRow(i);
-                    i--;
-                    count--;
-                    return;
-                }
+        int rm[] = new int[count];
+        dependenciasLinha(selected,rm);
+        for (int i =jTProjeto.getRowCount()-1; i >= 0; i--)
+            if (rm[i]>0){
+                ((DefaultTableModel) jTProjeto.getModel()).removeRow(i);
             }
+        for(int i = 0 ; i <jTProjeto.getRowCount(); i++)
             jTProjeto.setValueAt(Integer.toString(i+1), i, 0);
-        }
-        ((DefaultTableModel) jTProjeto.getModel()).removeRow(selected);
-        
     }//GEN-LAST:event_btnRemoverActionPerformed
 
+    
+    private void dependenciasLinha(int selected, int rm[]){
+        count--;
+        selected +=1;
+        for(int i = 0; i< jTProjeto.getRowCount(); i++){
+            if (jTProjeto.getValueAt(i, 3).toString().equals("")){
+                continue;
+            }
+            String deps[] = jTProjeto.getValueAt(i, 3)
+                            .toString()
+                            .split(",");
+            for (String d : deps){
+                if (d.equals(Integer.toString(selected))){
+                    dependenciasLinha(i,rm);
+                }
+            }
+        }
+        rm[selected-1] = selected;
+        System.out.println("rm : "+selected);
+    }
+    
     
     /**
      * @param args the command line arguments
@@ -380,6 +408,7 @@ public class FormInserirProjeto extends javax.swing.JFrame {
     private javax.swing.JButton btnRemover;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JButton btnSimular;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTProjeto;
     private javax.swing.JLabel lblDependencia;
@@ -391,6 +420,7 @@ public class FormInserirProjeto extends javax.swing.JFrame {
     private javax.swing.JPanel painelProjeto;
     private javax.swing.JPanel painelTabela;
     private javax.swing.JTextField txtDependencias;
+    private javax.swing.JTextField txtDescricao;
     private javax.swing.JTextField txtDuracao;
     private javax.swing.JTextField txtEtapa;
     private javax.swing.JTextField txtProjeto;

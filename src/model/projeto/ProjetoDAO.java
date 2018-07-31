@@ -65,7 +65,8 @@ class ProjetoDAO implements IDAO<Projeto> {
                 + "    FOREIGN KEY (`dependencia`)"
                 + "    REFERENCES `etapas` (`id`)"
                 + "    ON DELETE CASCADE"
-                + "    ON UPDATE CASCADE)"
+                + "    ON UPDATE CASCADE,"
+                + "  check(dependencia <> dependente))"
                 + "ENGINE = InnoDB;";
     }
 
