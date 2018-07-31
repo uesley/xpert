@@ -119,6 +119,7 @@ public class Etapa implements IDAO<Etapa> {
 
     
     public void update() {
+        System.out.println("slacnaicsa: "+ this.getId());
         dao.update();
     }
 

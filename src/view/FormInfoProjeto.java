@@ -8,7 +8,9 @@ package view;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import model.etapa.Etapa;
 import model.projeto.Projeto;
 import xPertCore.EtapaCore;
 import xPertCore.ProjetoCore;
@@ -49,6 +51,7 @@ public class FormInfoProjeto extends javax.swing.JFrame {
     }
     
     private void refresh(){
+        etapas = projetoCore.getEtapasDisponiveis();
         jLabelEtapasAFazer.setText("Etapas a fazer: " + projetoCore.getEtapasAFazer());
         jLabelEtapasAtrasadas.setText("Etapas atrasadas: ");
         jLabelEtapasCriticas.setText("Etapas criticas: ");
@@ -58,6 +61,7 @@ public class FormInfoProjeto extends javax.swing.JFrame {
         jLabelMaiorProfundidadeAtual.setText("");
         jLabelMenorProfundidade.setText("");
         jLabelMenorProfundidadeAtual.setText("");
+        fillTabela();
     }
 
      private void fillTabela(){
@@ -364,6 +368,18 @@ public class FormInfoProjeto extends javax.swing.JFrame {
 
     private void btnMarcarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMarcarActionPerformed
         // TODO add your handling code here:
+        int selected = jTable1.getSelectedRow();
+        int gasto = Integer.parseInt(JOptionPane.showInputDialog(this, 
+                    "Informe o tempo gasto para concluir a tarefa",
+                    "Confirmar conclusão",
+                    JOptionPane.OK_CANCEL_OPTION));
+        this.etapas.get(selected).concluirEtapa(gasto);
+        System.out.println(this.etapas.get(selected).getIdentificacao() + " salvando..");
+        Etapa e = new Etapa(projeto.getId()).find(this.etapas.get(selected).getIdentificacao());
+        e.setRealizado(true);
+        e.setDuracao_real(gasto);
+        e.update();
+        refresh();
     }//GEN-LAST:event_btnMarcarActionPerformed
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
