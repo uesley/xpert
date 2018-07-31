@@ -164,10 +164,17 @@ public class EtapaCore {
             
             return targetEtapa;
         }
-	
         public String toString()
         {
             return "Id: "+getIdentificacao()+"\nNome:"+getNome()+"\nRealizado? "+isRealizado()+"\n Disponivel? "+isDisponivel();
+        }
+        public boolean isAtrasada()
+        {
+            return getTempoDeDuracaoReal()-getTempoDeDuracaoPrevista()>0;
+        }
+        public boolean isCritica()
+        {
+            return getMaiorTempoDeFolga()==0;
         }
 	
 	
