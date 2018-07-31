@@ -45,6 +45,19 @@ public class FormInfoProjeto extends javax.swing.JFrame {
         this.setMaximumSize(new Dimension(1000, 700));
         this.setMinimumSize(new Dimension(1000, 700));
         this.setVisible(true);
+        refresh();
+    }
+    
+    private void refresh(){
+        jLabelEtapasAFazer.setText("Etapas a fazer: " + projetoCore.getEtapasAFazer());
+        jLabelEtapasAtrasadas.setText("Etapas atrasadas: ");
+        jLabelEtapasCriticas.setText("Etapas criticas: ");
+        jLabelEtapasRealizadas.setText("Etapas Realizadas: " + projetoCore.getEtapasConcluidas());
+        
+        jLabelMaiorProfundidade.setText("");
+        jLabelMaiorProfundidadeAtual.setText("");
+        jLabelMenorProfundidade.setText("");
+        jLabelMenorProfundidadeAtual.setText("");
     }
 
      private void fillTabela(){
@@ -91,27 +104,14 @@ public class FormInfoProjeto extends javax.swing.JFrame {
         jLabelEtapasAtrasadas = new javax.swing.JLabel();
         jLabelEtapasCriticas = new javax.swing.JLabel();
         jLabelEtapasAFazer = new javax.swing.JLabel();
-        painelEtapas1 = new javax.swing.JPanel();
-        jLabelEtapasRealizadas1 = new javax.swing.JLabel();
-        jLabelEtapasAtrasadas1 = new javax.swing.JLabel();
-        jLabelEtapasCriticas1 = new javax.swing.JLabel();
-        jLabelEtapasAFazer1 = new javax.swing.JLabel();
         painelTempo = new javax.swing.JPanel();
         jLabelDiasRestantes = new javax.swing.JLabel();
         jLabelETA = new javax.swing.JLabel();
         jLabelDataInicio = new javax.swing.JLabel();
-        painelTempo1 = new javax.swing.JPanel();
-        jLabelDiasRestantes1 = new javax.swing.JLabel();
-        jLabelETA1 = new javax.swing.JLabel();
-        jLabelDataInicio1 = new javax.swing.JLabel();
         painelProfundidade = new javax.swing.JPanel();
         jLabelMenorProfundidadeAtual = new javax.swing.JLabel();
         jLabelMaiorProfundidadeAtual = new javax.swing.JLabel();
         jLabelProfundidadeTotal = new javax.swing.JLabel();
-        painelProfundidade1 = new javax.swing.JPanel();
-        jLabelMenorProfundidadeAtual1 = new javax.swing.JLabel();
-        jLabelMaiorProfundidadeAtual1 = new javax.swing.JLabel();
-        jLabelProfundidadeTotal1 = new javax.swing.JLabel();
         painelAcoes = new javax.swing.JPanel();
         btnMarcar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
@@ -119,7 +119,9 @@ public class FormInfoProjeto extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAutoRequestFocus(false);
-        setPreferredSize(new java.awt.Dimension(1000, 700));
+        setMaximumSize(new java.awt.Dimension(1000, 700));
+        setMinimumSize(new java.awt.Dimension(1000, 700));
+        setSize(new java.awt.Dimension(1000, 700));
 
         jLabelNomeDoProjeto.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabelNomeDoProjeto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -160,52 +162,6 @@ public class FormInfoProjeto extends javax.swing.JFrame {
         jLabelEtapasAFazer.setMinimumSize(new java.awt.Dimension(100, 15));
         jLabelEtapasAFazer.setPreferredSize(new java.awt.Dimension(100, 15));
 
-        jLabelEtapasRealizadas1.setText("-");
-        jLabelEtapasRealizadas1.setMaximumSize(new java.awt.Dimension(100, 15));
-        jLabelEtapasRealizadas1.setMinimumSize(new java.awt.Dimension(100, 15));
-        jLabelEtapasRealizadas1.setPreferredSize(new java.awt.Dimension(100, 15));
-
-        jLabelEtapasAtrasadas1.setText("-");
-        jLabelEtapasAtrasadas1.setMaximumSize(new java.awt.Dimension(100, 15));
-        jLabelEtapasAtrasadas1.setMinimumSize(new java.awt.Dimension(100, 15));
-        jLabelEtapasAtrasadas1.setPreferredSize(new java.awt.Dimension(100, 15));
-
-        jLabelEtapasCriticas1.setText("-");
-        jLabelEtapasCriticas1.setMaximumSize(new java.awt.Dimension(100, 15));
-        jLabelEtapasCriticas1.setMinimumSize(new java.awt.Dimension(100, 15));
-        jLabelEtapasCriticas1.setPreferredSize(new java.awt.Dimension(100, 15));
-
-        jLabelEtapasAFazer1.setText("-");
-        jLabelEtapasAFazer1.setMaximumSize(new java.awt.Dimension(100, 15));
-        jLabelEtapasAFazer1.setMinimumSize(new java.awt.Dimension(100, 15));
-        jLabelEtapasAFazer1.setPreferredSize(new java.awt.Dimension(100, 15));
-
-        javax.swing.GroupLayout painelEtapas1Layout = new javax.swing.GroupLayout(painelEtapas1);
-        painelEtapas1.setLayout(painelEtapas1Layout);
-        painelEtapas1Layout.setHorizontalGroup(
-            painelEtapas1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(painelEtapas1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(painelEtapas1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelEtapasAFazer1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelEtapasRealizadas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelEtapasCriticas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelEtapasAtrasadas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
-        painelEtapas1Layout.setVerticalGroup(
-            painelEtapas1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(painelEtapas1Layout.createSequentialGroup()
-                .addComponent(jLabelEtapasRealizadas1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelEtapasAFazer1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelEtapasAtrasadas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelEtapasCriticas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         javax.swing.GroupLayout painelEtapasLayout = new javax.swing.GroupLayout(painelEtapas);
         painelEtapas.setLayout(painelEtapasLayout);
         painelEtapasLayout.setHorizontalGroup(
@@ -213,17 +169,13 @@ public class FormInfoProjeto extends javax.swing.JFrame {
             .addGroup(painelEtapasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(painelEtapasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelEtapasAFazer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelEtapasRealizadas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelEtapasCriticas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelEtapasAtrasadas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(painelEtapas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(painelEtapasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabelEtapasCriticas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelEtapasRealizadas, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                        .addComponent(jLabelEtapasAFazer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabelEtapasAtrasadas, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
-
-        painelEtapasLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabelEtapasAFazer, jLabelEtapasCriticas, jLabelEtapasRealizadas});
-
         painelEtapasLayout.setVerticalGroup(
             painelEtapasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelEtapasLayout.createSequentialGroup()
@@ -233,8 +185,8 @@ public class FormInfoProjeto extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelEtapasAtrasadas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelEtapasCriticas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(painelEtapas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelEtapasCriticas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12))
         );
 
         jLabelDiasRestantes.setText("Dias Restantes:");
@@ -242,36 +194,6 @@ public class FormInfoProjeto extends javax.swing.JFrame {
         jLabelETA.setText("ETA:");
 
         jLabelDataInicio.setText("Data de Início:");
-
-        jLabelDiasRestantes1.setText("-");
-
-        jLabelETA1.setText("-");
-
-        jLabelDataInicio1.setText("-");
-
-        javax.swing.GroupLayout painelTempo1Layout = new javax.swing.GroupLayout(painelTempo1);
-        painelTempo1.setLayout(painelTempo1Layout);
-        painelTempo1Layout.setHorizontalGroup(
-            painelTempo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(painelTempo1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(painelTempo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelETA1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelDataInicio1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelDiasRestantes1))
-                .addContainerGap())
-        );
-        painelTempo1Layout.setVerticalGroup(
-            painelTempo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(painelTempo1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabelETA1)
-                .addGap(0, 0, 0)
-                .addComponent(jLabelDataInicio1)
-                .addGap(0, 0, 0)
-                .addComponent(jLabelDiasRestantes1)
-                .addContainerGap())
-        );
 
         javax.swing.GroupLayout painelTempoLayout = new javax.swing.GroupLayout(painelTempo);
         painelTempo.setLayout(painelTempoLayout);
@@ -281,11 +203,9 @@ public class FormInfoProjeto extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(painelTempoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelETA, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelDataInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelDiasRestantes))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(painelTempo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                    .addComponent(jLabelDiasRestantes)
+                    .addComponent(jLabelDataInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(106, 106, 106))
         );
         painelTempoLayout.setVerticalGroup(
             painelTempoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -297,7 +217,6 @@ public class FormInfoProjeto extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addComponent(jLabelDiasRestantes)
                 .addContainerGap())
-            .addComponent(painelTempo1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         jLabelMenorProfundidadeAtual.setText("Menor Profundidade Atual:");
@@ -305,36 +224,6 @@ public class FormInfoProjeto extends javax.swing.JFrame {
         jLabelMaiorProfundidadeAtual.setText("Maior Profundidade Atual:");
 
         jLabelProfundidadeTotal.setText("Profundidade Total:");
-
-        jLabelMenorProfundidadeAtual1.setText("-");
-
-        jLabelMaiorProfundidadeAtual1.setText("-");
-
-        jLabelProfundidadeTotal1.setText("-");
-
-        javax.swing.GroupLayout painelProfundidade1Layout = new javax.swing.GroupLayout(painelProfundidade1);
-        painelProfundidade1.setLayout(painelProfundidade1Layout);
-        painelProfundidade1Layout.setHorizontalGroup(
-            painelProfundidade1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(painelProfundidade1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(painelProfundidade1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelMenorProfundidadeAtual1)
-                    .addComponent(jLabelMaiorProfundidadeAtual1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelProfundidadeTotal1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
-        painelProfundidade1Layout.setVerticalGroup(
-            painelProfundidade1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(painelProfundidade1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabelMenorProfundidadeAtual1)
-                .addGap(0, 0, 0)
-                .addComponent(jLabelMaiorProfundidadeAtual1)
-                .addGap(0, 0, 0)
-                .addComponent(jLabelProfundidadeTotal1)
-                .addContainerGap())
-        );
 
         javax.swing.GroupLayout painelProfundidadeLayout = new javax.swing.GroupLayout(painelProfundidade);
         painelProfundidade.setLayout(painelProfundidadeLayout);
@@ -344,11 +233,9 @@ public class FormInfoProjeto extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(painelProfundidadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelMenorProfundidadeAtual)
-                    .addComponent(jLabelMaiorProfundidadeAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelProfundidadeTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(painelProfundidade1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                    .addComponent(jLabelProfundidadeTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelMaiorProfundidadeAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(150, 150, 150))
         );
         painelProfundidadeLayout.setVerticalGroup(
             painelProfundidadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -358,11 +245,11 @@ public class FormInfoProjeto extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addComponent(jLabelMaiorProfundidadeAtual)
                 .addGap(0, 0, 0)
-                .addComponent(jLabelProfundidadeTotal))
-            .addComponent(painelProfundidade1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelProfundidadeTotal)
+                .addGap(12, 12, 12))
         );
 
-        painelAcoes.setLayout(new java.awt.GridLayout());
+        painelAcoes.setLayout(new java.awt.GridLayout(1, 0));
 
         btnMarcar.setText("Marcar Etapa");
         btnMarcar.addActionListener(new java.awt.event.ActionListener() {
@@ -411,11 +298,11 @@ public class FormInfoProjeto extends javax.swing.JFrame {
                                 .addComponent(painelTempo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(77, 77, 77)
                         .addComponent(painelEtapas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(0, 0, 0)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelNumeroDeEtapasAtrasadas)
                             .addComponent(jLabelValorEtapasRealizadas))
-                        .addGap(19, 19, 19)
+                        .addGap(0, 0, 0)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelValorDataInicio)
                             .addComponent(jLabelNumeroDeEtapasAFazer))
@@ -432,7 +319,7 @@ public class FormInfoProjeto extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(painelAcoes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 936, Short.MAX_VALUE)
                         .addComponent(barraDeProgresso, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -460,12 +347,12 @@ public class FormInfoProjeto extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(painelEtapas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(25, 25, 25)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(barraDeProgresso, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(painelAcoes, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(0, 3, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelValorProfundidadeTotal)
                     .addComponent(jLabelNumeroDeDiasRestantes))
@@ -531,31 +418,21 @@ public class FormInfoProjeto extends javax.swing.JFrame {
     private javax.swing.JButton btnSair;
     private javax.swing.JLabel jLabelDataETA;
     private javax.swing.JLabel jLabelDataInicio;
-    private javax.swing.JLabel jLabelDataInicio1;
     private javax.swing.JLabel jLabelDiasRestantes;
-    private javax.swing.JLabel jLabelDiasRestantes1;
     private javax.swing.JLabel jLabelETA;
-    private javax.swing.JLabel jLabelETA1;
     private javax.swing.JLabel jLabelEtapasAFazer;
-    private javax.swing.JLabel jLabelEtapasAFazer1;
     private javax.swing.JLabel jLabelEtapasAtrasadas;
-    private javax.swing.JLabel jLabelEtapasAtrasadas1;
     private javax.swing.JLabel jLabelEtapasCriticas;
-    private javax.swing.JLabel jLabelEtapasCriticas1;
     private javax.swing.JLabel jLabelEtapasRealizadas;
-    private javax.swing.JLabel jLabelEtapasRealizadas1;
     private javax.swing.JLabel jLabelMaiorProfundidade;
     private javax.swing.JLabel jLabelMaiorProfundidadeAtual;
-    private javax.swing.JLabel jLabelMaiorProfundidadeAtual1;
     private javax.swing.JLabel jLabelMenorProfundidade;
     private javax.swing.JLabel jLabelMenorProfundidadeAtual;
-    private javax.swing.JLabel jLabelMenorProfundidadeAtual1;
     private javax.swing.JLabel jLabelNomeDoProjeto;
     private javax.swing.JLabel jLabelNumeroDeDiasRestantes;
     private javax.swing.JLabel jLabelNumeroDeEtapasAFazer;
     private javax.swing.JLabel jLabelNumeroDeEtapasAtrasadas;
     private javax.swing.JLabel jLabelProfundidadeTotal;
-    private javax.swing.JLabel jLabelProfundidadeTotal1;
     private javax.swing.JLabel jLabelValorDataInicio;
     private javax.swing.JLabel jLabelValorEtapasRealizadas;
     private javax.swing.JLabel jLabelValorProfundidadeTotal;
@@ -563,10 +440,7 @@ public class FormInfoProjeto extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JPanel painelAcoes;
     private javax.swing.JPanel painelEtapas;
-    private javax.swing.JPanel painelEtapas1;
     private javax.swing.JPanel painelProfundidade;
-    private javax.swing.JPanel painelProfundidade1;
     private javax.swing.JPanel painelTempo;
-    private javax.swing.JPanel painelTempo1;
     // End of variables declaration//GEN-END:variables
 }
