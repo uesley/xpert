@@ -1,6 +1,9 @@
 package view;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.etapa.Etapa;
@@ -230,7 +233,7 @@ public class FormInserirProjeto extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
+                .addGap(70, 70, 70)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(painelAcoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(painelProjeto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -318,6 +321,18 @@ public class FormInserirProjeto extends javax.swing.JFrame {
                 }
             }
         }
+        /*String data = JOptionPane.showInputDialog(rootPane, "Digite a data de início:");
+        */
+        //Como instanciar uma data e adcionar dias a DATA, será preciso a adição disso em projeto core, e projeto e no banco de dados.
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date date = new Date();
+        JOptionPane.showMessageDialog(rootPane, "Data de inicio: "+formatter.format(date));
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.add(Calendar.DATE,120);
+        date = cal.getTime();
+        JOptionPane.showMessageDialog(rootPane, formatter.format(date));
+        
         JOptionPane.showMessageDialog(this, "Projeto Salvo com sucesso!","Sucesso",JOptionPane.INFORMATION_MESSAGE);
         this.dispose();
     }//GEN-LAST:event_btnSalvarActionPerformed

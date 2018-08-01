@@ -43,7 +43,7 @@ public class EtapaCore {
 		this.listaDeDependencias = listaDeDependencias;
                 setProfundidade(-1);
 	}
-        public EtapaCore(int idEtapa,String nomeEtapa,int ETA,String descricao,int tempoDeDuracaoReal,boolean realizado,int menorTempoDeInicio,int menorTempoDeFim,int maiorTempoDeFolga,ArrayList<EtapaCore> listaDeDependencias)
+        public EtapaCore(int idEtapa,String nomeEtapa,int ETA,String descricao,int tempoDeDuracaoReal,boolean realizado,int menorTempoDeInicio,int menorTempoDeFim,int maiorTempoDeFolga,ArrayList<EtapaCore> listaDeDependencias,int profudidade)
 	{
 		setIdentificacao(idEtapa);
 		setNome(nomeEtapa);
@@ -56,7 +56,7 @@ public class EtapaCore {
                 setMenorTempoDeFim(menorTempoDeFim);
                 setMaiorTempoDeFolga(maiorTempoDeFolga);
 		this.listaDeDependencias = listaDeDependencias;
-                setProfundidade(-1);
+                setProfundidade(profudidade);
 	}
 
 	public int getIdentificacao() {
@@ -172,6 +172,7 @@ public class EtapaCore {
             targetEtapa.setMenorTempoFim(getMenorTempoDeFim());
             targetEtapa.setMenorTempoInicio(getMenorTempoDeIncio());
             targetEtapa.setNome(getNome());
+            targetEtapa.setProfundidade(getProfundidade());
             
             return targetEtapa;
         }

@@ -18,6 +18,16 @@ public class Etapa implements IDAO<Etapa> {
     private int folga;
     private int menor_tempo_inicio;
     private int menor_tempo_fim;
+    private int profundidade;
+
+    public int getProfundidade() {
+        return profundidade;
+    }
+
+    public void setProfundidade(int profundidade) {
+        this.profundidade = profundidade;
+    }
+    
     private EtapaDAO dao;
 
     public Etapa(int projeto) {
@@ -119,7 +129,6 @@ public class Etapa implements IDAO<Etapa> {
 
     
     public void update() {
-        System.out.println("slacnaicsa: "+ this.getId());
         dao.update();
     }
 
@@ -189,7 +198,7 @@ public class Etapa implements IDAO<Etapa> {
     }
     public EtapaCore convert()
     {
-        EtapaCore target = new EtapaCore(getId(),getNome(),getDuracao_prevista(),getDescricao(), getDuracao_real(), getRealizado(), getMenorTempoInicio(), getMenorTempoFim(), getFolga(),null);
+        EtapaCore target = new EtapaCore(getId(),getNome(),getDuracao_prevista(),getDescricao(), getDuracao_real(), getRealizado(), getMenorTempoInicio(), getMenorTempoFim(), getFolga(),null,getProfundidade());
         return target;
     }
 }
