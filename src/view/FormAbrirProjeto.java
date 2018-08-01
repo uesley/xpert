@@ -39,15 +39,15 @@ public class FormAbrirProjeto extends javax.swing.JFrame {
         painelAcoes = new javax.swing.JPanel();
         btnAbrir = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
+        btnExportar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         listScroll = new javax.swing.JScrollPane();
         listProjetos = fillProjectTable();
-        btnExportar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         painelAcoes.setPreferredSize(new java.awt.Dimension(1000, 700));
-        painelAcoes.setLayout(new java.awt.GridLayout(1, 0));
+        painelAcoes.setLayout(new java.awt.GridLayout());
 
         btnAbrir.setText("Abrir");
         btnAbrir.addActionListener(new java.awt.event.ActionListener() {
@@ -65,6 +65,14 @@ public class FormAbrirProjeto extends javax.swing.JFrame {
         });
         painelAcoes.add(btnExcluir);
 
+        btnExportar.setText("Exportar");
+        btnExportar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExportarActionPerformed(evt);
+            }
+        });
+        painelAcoes.add(btnExportar);
+
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -77,13 +85,6 @@ public class FormAbrirProjeto extends javax.swing.JFrame {
         listProjetos.setMinimumSize(new java.awt.Dimension(30, 80));
         listScroll.setViewportView(listProjetos);
 
-        btnExportar.setText("exportar");
-        btnExportar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExportarActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -92,10 +93,7 @@ public class FormAbrirProjeto extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(painelAcoes, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(listScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 495, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnExportar, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                    .addComponent(listScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 495, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -105,9 +103,7 @@ public class FormAbrirProjeto extends javax.swing.JFrame {
                 .addComponent(listScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(painelAcoes, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnExportar)
-                .addContainerGap())
+                .addGap(40, 40, 40))
         );
 
         pack();
