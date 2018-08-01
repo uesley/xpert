@@ -49,7 +49,7 @@ public class ProjetoCore {
         }
     }
 
-    public double getSituacao() {
+    public int getSituacao() {
         int n = etapasVinculadas.size();
         int tempoRealizado = 0, tempoTotal = 0;
         for (int c = 0; c < n; c++) {
@@ -60,7 +60,7 @@ public class ProjetoCore {
             tempoTotal += etapasVinculadas.get(c).getTempoDeDuracaoPrevista();
         }
 
-        return (double) tempoRealizado / tempoTotal;
+        return (int)((double) (tempoRealizado*100) / tempoTotal);
     }
 
     public int getAtraso() {
@@ -272,5 +272,14 @@ public class ProjetoCore {
             targetProjeto.updateEtapa(etapasVinculadas.get(c).convert(targetProjeto.getId()));
         }
         return targetProjeto;
+    }
+    public int getDiasRestantes()
+    {
+        ArrayList<EtapaCore> concluidas = getEtapasConcluidas();
+        int sum=0,n=concluidas.size();
+        for(int c=0;c<n;c++)
+            sum+=concluidas.get(c).getTempoDeDuracaoPrevista();
+        
+        return getETA()-sum;
     }
 }

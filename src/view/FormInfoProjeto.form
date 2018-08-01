@@ -158,6 +158,10 @@
     <Component class="javax.swing.JLabel" name="NumeroDeEtapasCriticas">
     </Component>
     <Component class="javax.swing.JProgressBar" name="barraDeProgresso">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="barraDeProgresso.setMinimum(0);&#xa;barraDeProgresso.setMaximum(100);&#xa;barraDeProgresso.setValue(0);"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JProgressBar()"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelNomeDoProjeto">
       <Properties>

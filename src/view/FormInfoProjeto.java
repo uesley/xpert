@@ -75,6 +75,10 @@ public class FormInfoProjeto extends javax.swing.JFrame {
         jLabelETA.setText("ETA: "+formatter.format(dateETA));
         jLabelAtraso.setText("Atraso: "+projetoCore.getAtraso()+" dias");
         jLabelDataInicio.setText("Data de início: "+formatter.format(dateInicio));
+        jLabelDiasRestantes.setText("Dias restantes: "+projetoCore.getDiasRestantes());
+        barraDeProgresso.setValue(projetoCore.getSituacao());
+        barraDeProgresso.setStringPainted(true);
+        barraDeProgresso.setString(projetoCore.getSituacao()+"%");
     }
 
      private void fillTabela(){
@@ -91,6 +95,7 @@ public class FormInfoProjeto extends javax.swing.JFrame {
         }
         String titulos[] = {"id","nome","ETA","folga"};
         jTable1 = new JTable(data,titulos);
+        
         jScrollPane1.setViewportView(jTable1);
     } 
     
@@ -387,6 +392,10 @@ public class FormInfoProjeto extends javax.swing.JFrame {
                     .addComponent(jLabelNumeroDeDiasRestantes))
                 .addGap(0, 0, 0))
         );
+
+        barraDeProgresso.setMinimum(0);
+        barraDeProgresso.setMaximum(100);
+        barraDeProgresso.setValue(0);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
