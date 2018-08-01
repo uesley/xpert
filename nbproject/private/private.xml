@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
+        <file>
+            <url>src/model/projeto/Projeto.java</url>
+            <bookmark id="1">
+                <name/>
+                <line>106</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/uesleymelo/xpert/xpert/src/XPERT.java</file>
             <file>file:/home/uesleymelo/xpert/xpert/src/model/etapa/Etapa.java</file>
-            <file>file:/home/uesleymelo/xpert/xpert/src/model/IDAO.java</file>
-            <file>file:/home/uesleymelo/xpert/xpert/src/database/DBConnection.java</file>
-            <file>file:/home/uesleymelo/xpert/xpert/src/database/MySQLConnection.java</file>
             <file>file:/home/uesleymelo/xpert/xpert/src/model/etapa/EtapaDAO.java</file>
-            <file>file:/home/uesleymelo/xpert/xpert/src/model/etapa/IEtapa.java</file>
+            <file>file:/home/uesleymelo/xpert/xpert/src/view/FormInfoProjeto.java</file>
         </group>
     </open-files>
 </project-private>
