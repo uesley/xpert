@@ -6,7 +6,10 @@
 package view;
 
 import java.awt.Dimension;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -27,13 +30,19 @@ public class FormInfoProjeto extends javax.swing.JFrame {
     private Projeto projeto;
     private ArrayList<EtapaCore> etapas;
     private ProjetoCore projetoCore;
-    
+    private SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+    private Date dateInicio = new Date();
+    private Date dateETA = new Date();
+    private Calendar cal = Calendar.getInstance(); 
     public FormInfoProjeto(Projeto p) {
         projeto = p;
         projetoCore = projeto.convert();
         projetoCore.simular();
         projeto = projetoCore.convert();
         etapas = projetoCore.getEtapasDisponiveis();
+        cal.setTime(dateInicio);
+        cal.add(Calendar.DATE,projetoCore.getETA());
+        dateETA = cal.getTime();
         initComponents();
         configJanela();
     }
@@ -60,9 +69,12 @@ public class FormInfoProjeto extends javax.swing.JFrame {
         jLabelMenorProfundidadeAtual.setText("Menor profundidade atual: "+prof[0]);
         jLabelMaiorProfundidadeAtual.setText("Maior Profundidade Atual: " + prof[1]);
         jLabelProfundidadeTotal.setText("Profundidade Total: " + prof[2]);
-        
-        jLabelETA.setText("ETA: " + projetoCore.getETA());
-
+        cal.setTime(dateInicio);
+        cal.add(Calendar.DATE,projetoCore.getETA()+projetoCore.getAtraso());
+        dateETA = cal.getTime();
+        jLabelETA.setText("ETA: "+formatter.format(dateETA));
+        jLabelAtraso.setText("Atraso: "+projetoCore.getAtraso()+" dias");
+        jLabelDataInicio.setText("Data de início: "+formatter.format(dateInicio));
     }
 
      private void fillTabela(){
@@ -102,7 +114,6 @@ public class FormInfoProjeto extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabelNumeroDeEtapasAtrasadas = new javax.swing.JLabel();
-        jLabelValorDataInicio = new javax.swing.JLabel();
         jLabelNumeroDeDiasRestantes = new javax.swing.JLabel();
         jLabelDataETA = new javax.swing.JLabel();
         painelEtapas = new javax.swing.JPanel();
@@ -114,6 +125,7 @@ public class FormInfoProjeto extends javax.swing.JFrame {
         jLabelDiasRestantes = new javax.swing.JLabel();
         jLabelETA = new javax.swing.JLabel();
         jLabelDataInicio = new javax.swing.JLabel();
+        jLabelAtraso = new javax.swing.JLabel();
         painelProfundidade = new javax.swing.JPanel();
         jLabelMenorProfundidadeAtual = new javax.swing.JLabel();
         jLabelMaiorProfundidadeAtual = new javax.swing.JLabel();
@@ -172,12 +184,11 @@ public class FormInfoProjeto extends javax.swing.JFrame {
             painelEtapasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelEtapasLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(painelEtapasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelEtapasRealizadas, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(painelEtapasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jLabelEtapasCriticas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
-                        .addComponent(jLabelEtapasAtrasadas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabelEtapasAFazer, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGroup(painelEtapasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabelEtapasCriticas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelEtapasRealizadas, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
+                    .addComponent(jLabelEtapasAFazer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelEtapasAtrasadas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         painelEtapasLayout.setVerticalGroup(
             painelEtapasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -188,7 +199,7 @@ public class FormInfoProjeto extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelEtapasAtrasadas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelEtapasCriticas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelEtapasCriticas, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12))
         );
 
@@ -198,6 +209,8 @@ public class FormInfoProjeto extends javax.swing.JFrame {
 
         jLabelDataInicio.setText("Data de Início:");
 
+        jLabelAtraso.setText("Atraso:");
+
         javax.swing.GroupLayout painelTempoLayout = new javax.swing.GroupLayout(painelTempo);
         painelTempo.setLayout(painelTempoLayout);
         painelTempoLayout.setHorizontalGroup(
@@ -205,10 +218,12 @@ public class FormInfoProjeto extends javax.swing.JFrame {
             .addGroup(painelTempoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(painelTempoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelETA, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelDiasRestantes)
-                    .addComponent(jLabelDataInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(106, 106, 106))
+                    .addComponent(jLabelDataInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(painelTempoLayout.createSequentialGroup()
+                        .addComponent(jLabelETA, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabelDiasRestantes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelAtraso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         painelTempoLayout.setVerticalGroup(
             painelTempoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -219,6 +234,8 @@ public class FormInfoProjeto extends javax.swing.JFrame {
                 .addComponent(jLabelDataInicio)
                 .addGap(0, 0, 0)
                 .addComponent(jLabelDiasRestantes)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelAtraso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -301,9 +318,7 @@ public class FormInfoProjeto extends javax.swing.JFrame {
                     .addComponent(jLabelNumeroDeEtapasAtrasadas)
                     .addComponent(jLabelValorEtapasRealizadas))
                 .addGap(0, 0, 0)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelValorDataInicio)
-                    .addComponent(jLabelNumeroDeEtapasAFazer))
+                .addComponent(jLabelNumeroDeEtapasAFazer)
                 .addGap(0, 0, 0)
                 .addComponent(jLabelDataETA)
                 .addGap(0, 0, 0)
@@ -350,13 +365,12 @@ public class FormInfoProjeto extends javax.swing.JFrame {
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabelMenorProfundidade)
                                         .addComponent(jLabelNumeroDeEtapasAtrasadas)
-                                        .addComponent(jLabelValorDataInicio)
                                         .addComponent(jLabelDataETA))))
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(painelEtapas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, 1000)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 422, 1000)
                         .addGap(18, 18, 18)
                         .addComponent(barraDeProgresso, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -367,7 +381,7 @@ public class FormInfoProjeto extends javax.swing.JFrame {
                             .addComponent(btnMarcar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 3, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelValorProfundidadeTotal)
                     .addComponent(jLabelNumeroDeDiasRestantes))
@@ -446,6 +460,7 @@ public class FormInfoProjeto extends javax.swing.JFrame {
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnMarcar;
     private javax.swing.JButton btnSair;
+    private javax.swing.JLabel jLabelAtraso;
     private javax.swing.JLabel jLabelDataETA;
     private javax.swing.JLabel jLabelDataInicio;
     private javax.swing.JLabel jLabelDiasRestantes;
@@ -463,7 +478,6 @@ public class FormInfoProjeto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelNumeroDeEtapasAFazer;
     private javax.swing.JLabel jLabelNumeroDeEtapasAtrasadas;
     private javax.swing.JLabel jLabelProfundidadeTotal;
-    private javax.swing.JLabel jLabelValorDataInicio;
     private javax.swing.JLabel jLabelValorEtapasRealizadas;
     private javax.swing.JLabel jLabelValorProfundidadeTotal;
     private javax.swing.JScrollPane jScrollPane1;

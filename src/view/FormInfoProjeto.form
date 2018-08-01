@@ -53,10 +53,7 @@
                   <Component id="jLabelValorEtapasRealizadas" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabelValorDataInicio" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabelNumeroDeEtapasAFazer" alignment="0" min="-2" max="-2" attributes="0"/>
-              </Group>
+              <Component id="jLabelNumeroDeEtapasAFazer" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               <Component id="jLabelDataETA" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
@@ -112,7 +109,6 @@
                                   <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                                       <Component id="jLabelMenorProfundidade" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabelNumeroDeEtapasAtrasadas" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabelValorDataInicio" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabelDataETA" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
@@ -122,8 +118,8 @@
                               <Component id="painelEtapas" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jScrollPane1" max="1000" attributes="0"/>
+                      <EmptySpace pref="8" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" pref="422" max="1000" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="barraDeProgresso" min="-2" pref="39" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -138,7 +134,7 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="3" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabelValorProfundidadeTotal" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabelNumeroDeDiasRestantes" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -236,8 +232,6 @@
     </Container>
     <Component class="javax.swing.JLabel" name="jLabelNumeroDeEtapasAtrasadas">
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabelValorDataInicio">
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabelNumeroDeDiasRestantes">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelDataETA">
@@ -247,15 +241,13 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabelEtapasRealizadas" min="-2" pref="233" max="-2" attributes="0"/>
-                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="jLabelEtapasCriticas" alignment="0" pref="213" max="32767" attributes="0"/>
-                          <Component id="jLabelEtapasAtrasadas" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jLabelEtapasAFazer" alignment="0" max="32767" attributes="0"/>
-                      </Group>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="jLabelEtapasCriticas" max="32767" attributes="0"/>
+                      <Component id="jLabelEtapasRealizadas" pref="233" max="32767" attributes="0"/>
+                      <Component id="jLabelEtapasAFazer" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jLabelEtapasAtrasadas" alignment="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -269,7 +261,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabelEtapasAtrasadas" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabelEtapasCriticas" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelEtapasCriticas" min="-2" pref="15" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -339,14 +331,17 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabelETA" min="-2" pref="76" max="-2" attributes="0"/>
-                      <Component id="jLabelDiasRestantes" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabelDataInicio" min="-2" pref="118" max="-2" attributes="0"/>
+                      <Component id="jLabelDataInicio" max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="jLabelETA" min="-2" pref="147" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                      </Group>
+                      <Component id="jLabelDiasRestantes" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jLabelAtraso" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="106" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -359,6 +354,8 @@
                   <Component id="jLabelDataInicio" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                   <Component id="jLabelDiasRestantes" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jLabelAtraso" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -378,6 +375,11 @@
         <Component class="javax.swing.JLabel" name="jLabelDataInicio">
           <Properties>
             <Property name="text" type="java.lang.String" value="Data de In&#xed;cio:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabelAtraso">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Atraso:"/>
           </Properties>
         </Component>
       </SubComponents>

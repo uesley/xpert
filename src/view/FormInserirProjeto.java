@@ -324,14 +324,14 @@ public class FormInserirProjeto extends javax.swing.JFrame {
         /*String data = JOptionPane.showInputDialog(rootPane, "Digite a data de início:");
         */
         //Como instanciar uma data e adcionar dias a DATA, será preciso a adição disso em projeto core, e projeto e no banco de dados.
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        /*SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date = new Date();
         JOptionPane.showMessageDialog(rootPane, "Data de inicio: "+formatter.format(date));
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         cal.add(Calendar.DATE,120);
         date = cal.getTime();
-        JOptionPane.showMessageDialog(rootPane, formatter.format(date));
+        JOptionPane.showMessageDialog(rootPane, formatter.format(date));*/
         
         JOptionPane.showMessageDialog(this, "Projeto Salvo com sucesso!","Sucesso",JOptionPane.INFORMATION_MESSAGE);
         this.dispose();
