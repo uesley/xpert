@@ -67,7 +67,8 @@ public class FormInfoProjeto extends javax.swing.JFrame {
     }
     
     private void refresh(){
-        etapas = projetoCore.getEtapasDisponiveis();
+       
+        etapas =  projeto.convert().getEtapasDisponiveis();
         jLabelEtapasAFazer.setText("Etapas a fazer: " + projetoCore.getEtapasAFazer());
         jLabelEtapasAtrasadas.setText("Etapas atrasadas: " + projetoCore.getEtapasAtrasadas());
         jLabelEtapasCriticas.setText("Etapas criticas: " + projetoCore.getEtapasCriticas());
