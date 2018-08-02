@@ -68,7 +68,7 @@ public class FormInfoProjeto extends javax.swing.JFrame {
     
     private void refresh(){
        
-        etapas =  projeto.convert().getEtapasDisponiveis();
+        etapas =  projetoCore.getEtapasDisponiveis();
         jLabelEtapasAFazer.setText("Etapas a fazer: " + projetoCore.getEtapasAFazer());
         jLabelEtapasAtrasadas.setText("Etapas atrasadas: " + projetoCore.getEtapasAtrasadas());
         jLabelEtapasCriticas.setText("Etapas criticas: " + projetoCore.getEtapasCriticas());
@@ -402,10 +402,19 @@ public class FormInfoProjeto extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+        
     private void btnMarcarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMarcarActionPerformed
-
         int selected = jTable1.getSelectedRow();
+        int gasto = Integer.parseInt(JOptionPane.showInputDialog(this, 
+                    "Informe o tempo gasto para concluir a tarefa",
+                    "Confirmar conclusão",
+                    JOptionPane.OK_CANCEL_OPTION));
+        projetoCore.concluirEtapaVinculada(this.etapas.get(selected).getIdentificacao(), gasto);
+        projeto = projetoCore.convert();
+        projeto.update();
+        refresh();
+        fillTabela();
+        /*int selected = jTable1.getSelectedRow();
         int gasto = Integer.parseInt(JOptionPane.showInputDialog(this, 
                     "Informe o tempo gasto para concluir a tarefa",
                     "Confirmar conclusão",
@@ -416,11 +425,13 @@ public class FormInfoProjeto extends javax.swing.JFrame {
         projeto = projetoCore.convert();
         projeto.update();
         refresh();
-        fillTabela();
+        fillTabela();*/
 
     }//GEN-LAST:event_btnMarcarActionPerformed
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+        projeto = projetoCore.convert();
+        projeto.update();
         dispose();
     }//GEN-LAST:event_btnSairActionPerformed
 
