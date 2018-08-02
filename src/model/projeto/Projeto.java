@@ -127,6 +127,7 @@ public class Projeto implements IDAO<Projeto>{
             etapasTarget.get(c).setListaDeDependencias(etapasTargetRef);
         }
         ProjetoCore target = new ProjetoCore(etapasTarget,getId(),getNome());
+        target.setSimulado(getSimulado());//haha
         return target;
     }
 

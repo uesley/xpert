@@ -36,6 +36,7 @@ public class FormInfoProjeto extends javax.swing.JFrame {
     private Date dateInicio = new Date();
     private Date dateETA = new Date();
     private Calendar cal = Calendar.getInstance(); 
+    
     public FormInfoProjeto(Projeto p) {
         projeto = p;
         projetoCore = projeto.convert();
@@ -88,20 +89,25 @@ public class FormInfoProjeto extends javax.swing.JFrame {
     }
 
      private void fillTabela(){
-        String [][] data = new String[etapas.size()][4];
+        Date datainicioEtapa = new Date();
+        String [][] data = new String[etapas.size()][5];
         int i =0;
         for (EtapaCore e : etapas){
+            cal.setTime(dateInicio);
+            cal.add(Calendar.DATE,e.getTempoRealDeInicioEtapa());
+            datainicioEtapa = cal.getTime();
             String[] row = {
                 Integer.toString(e.getIdentificacao()),
                 e.getNome(), 
-                Integer.toString(e.getTempoDeDuracaoPrevista()),
-                Integer.toString(e.getMaiorTempoDeFolga()),
+                Integer.toString(e.getTempoDeDuracaoPrevista())+" dias",
+                (Integer.toString(e.getMaiorTempoDeFolga())+" dias"),
+                formatter.format(datainicioEtapa),
             };
             data[i++] = row;
         }
-        String titulos[] = {"id","nome","ETA","folga"};
-        jTable1 = new JTable(data,titulos);
-        
+        String titulos[] = {"id","nome","ETA","folga","Data de inicio"};
+        jTable1 = new JTable(data,titulos); 
+      
         jScrollPane1.setViewportView(jTable1);
     } 
     
@@ -164,10 +170,11 @@ public class FormInfoProjeto extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nº", "Etapa", "ETA", "Concluído em"
+                "id","nome","ETA","folga","data de inicio"
             }
         ));
         fillTabela();
+        jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         jScrollPane1.setViewportView(jTable1);
 
         jLabelEtapasRealizadas.setText(bundle.getString("FormInfoProjeto.jLabelEtapasRealizadas.text")); // NOI18N
@@ -281,7 +288,7 @@ public class FormInfoProjeto extends javax.swing.JFrame {
                 .addGap(12, 12, 12))
         );
 
-        painelAcoes.setLayout(new java.awt.GridLayout());
+        painelAcoes.setLayout(new java.awt.GridLayout(1, 0));
 
         btnMarcar.setText(bundle.getString("FormInfoProjeto.btnMarcar.text")); // NOI18N
         btnMarcar.addActionListener(new java.awt.event.ActionListener() {

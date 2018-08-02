@@ -188,6 +188,36 @@ public class EtapaCore {
         {
             return getMaiorTempoDeFolga()==0;
         }
-	
+        public int getTempoRealDeInicioEtapa()
+        {
+            if(!isDisponivel())
+            {
+                int tempo=0;
+
+                ArrayList<EtapaCore> dependencias =getListaDeDependencias();
+
+                while(dependencias.size()>0)
+                {
+                    int n=dependencias.size();
+                    int maiorTempoCounter=0;
+                    
+                    for(int c=0;c<n;c++)
+                        if(dependencias.get(c).getTempoDeDuracaoReal() > dependencias.get(maiorTempoCounter).getTempoDeDuracaoReal())
+                            maiorTempoCounter = c;
+                    
+                    tempo+=dependencias.get(maiorTempoCounter).getTempoDeDuracaoReal();
+                    dependencias = dependencias.get(maiorTempoCounter).getListaDeDependencias();
+                }
+
+
+                return tempo;
+            }
+            else
+            {
+                System.out.println("Etapa não disponível");
+                return 0;
+            }
+        }
 	
 }
+
