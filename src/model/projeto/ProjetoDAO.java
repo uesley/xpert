@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import model.IDAO;
 import model.etapa.Etapa;
-import model.etapa.EtapaDAO;
 
 class ProjetoDAO implements IDAO<Projeto> {
 
@@ -44,7 +43,7 @@ class ProjetoDAO implements IDAO<Projeto> {
                 + "  `duracao_real` INT NULL DEFAULT 0,\n"
                 + "  `folga` INT NULL DEFAULT 0,\n"
                 + "  `menor_tempo_inicio` INT NULL DEFAULT 0,\n"
-                + "  `maior_tempo_fim` INT NULL DEFAULT 0,\n"
+                + "  `menor_tempo_fim` INT NULL DEFAULT 0,\n"
                 + "  `projeto` INT NOT NULL,\n"
                 + "  `profundidade` INT NULL DEFAULT 0,"
                 + "  PRIMARY KEY (`id`))"
@@ -73,8 +72,8 @@ class ProjetoDAO implements IDAO<Projeto> {
 
     @Override
     public void update() {
-        String fields[] = {"nome", "situacao"};
-        String values[] = {projeto.getNome(), Float.toString(projeto.getSituacao())};
+        String fields[] = {"nome", "situacao", "simulado"};
+        String values[] = {projeto.getNome(), Float.toString(projeto.getSituacao()), projeto.getSimulado()?"1":"0"};
         database.update(table, projeto.getId(), fields, values);
     }
 

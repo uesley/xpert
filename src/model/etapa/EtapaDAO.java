@@ -32,6 +32,7 @@ public class EtapaDAO implements IDAO<Etapa> {
         fields.add("descricao");
         fields.add("duracao_prevista");
         fields.add("projeto");
+        fields.add("realizado");
 
         ArrayList<String> values = new ArrayList<>();
         values.add(etapa.getNome());
@@ -47,17 +48,18 @@ public class EtapaDAO implements IDAO<Etapa> {
 
     @Override
     public void update() {
-        String f[] = new String[2];
         ArrayList<String> fields = new ArrayList();
+        int r =  etapa.getRealizado() ? 1 : 0;
         fields.add("nome");
         fields.add("descricao");
         fields.add("duracao_prevista");
         fields.add("duracao_real");
-        fields.add("disponibilidade");
         fields.add("realizado");
         fields.add("folga");
         fields.add("projeto");
         fields.add("profundidade");
+        fields.add("menor_tempo_inicio");
+        fields.add("maior_tempo_fim");///@Todo arrumar isto
 
         ArrayList<String> values = new ArrayList<>();
         values.add(etapa.getNome());
@@ -65,16 +67,22 @@ public class EtapaDAO implements IDAO<Etapa> {
         values.add(Integer.toString(etapa.getDuracao_prevista()));
         values.add(Integer.toString(etapa.getDuracao_real()));
         values.add(Integer.toString(etapa.getDisponibilidade() ? 1 : 0));
-        values.add(Integer.toString(etapa.getRealizado() ? 1 : 0));
         values.add(Integer.toString(etapa.getFolga()));
         values.add(Integer.toString(etapa.getProjeto()));
         values.add(Integer.toString(etapa.getProfundidade()));
+        values.add(Integer.toString(etapa.getMenorTempoInicio()));
+        values.add(Integer.toString(etapa.getMenorTempoFim()));
+        if (r != 0){
+            fields.add("disponibilidade");
+            values.add(Integer.toString(r));
+        }
 
         database.update(
                 table,
                 etapa.getId(),
                 fields.toArray(new String[0]),
                 values.toArray(new String[0]));
+        System.out.println("QUERY: "+database.getLastQuery());
     }
 
     @Override

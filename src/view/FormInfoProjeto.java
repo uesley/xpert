@@ -6,7 +6,6 @@
 package view;
 
 import java.awt.Dimension;
-import java.awt.Frame;
 import java.awt.Toolkit;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -42,6 +41,7 @@ public class FormInfoProjeto extends javax.swing.JFrame {
         projetoCore = projeto.convert();
         projetoCore.simular();
         projeto = projetoCore.convert();
+        projeto.update();
         etapas = projetoCore.getEtapasDisponiveis();
         cal.setTime(dateInicio);
         cal.add(Calendar.DATE,projetoCore.getETA());
@@ -410,10 +410,11 @@ public class FormInfoProjeto extends javax.swing.JFrame {
                     "Confirmar conclusão",
                     JOptionPane.OK_CANCEL_OPTION));
         projetoCore.concluirEtapaVinculada(this.etapas.get(selected).getIdentificacao(), gasto);
-        Etapa e = new Etapa(projeto.getId()).find(this.etapas.get(selected).getIdentificacao());
+        Etapa e = this.etapas.get(selected).convert(projeto.getId());
         e.setRealizado(true);
-        e.setDuracao_real(gasto);
+        System.out.println("salvou a atarefa: "+e.getId());
         e.update();
+        System.out.println(".... ::: "+e.getRealizado());
         projeto = projetoCore.convert();
         projeto.update();
         refresh();
