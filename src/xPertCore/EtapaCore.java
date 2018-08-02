@@ -173,6 +173,7 @@ public class EtapaCore {
             targetEtapa.setMenorTempoInicio(getMenorTempoDeIncio());
             targetEtapa.setNome(getNome());
             targetEtapa.setProfundidade(getProfundidade());
+            targetEtapa.setRealizado(isRealizado());
             
             return targetEtapa;
         }
