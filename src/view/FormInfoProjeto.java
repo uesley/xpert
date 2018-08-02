@@ -411,10 +411,7 @@ public class FormInfoProjeto extends javax.swing.JFrame {
                     JOptionPane.OK_CANCEL_OPTION));
         projetoCore.concluirEtapaVinculada(this.etapas.get(selected).getIdentificacao(), gasto);
         Etapa e = this.etapas.get(selected).convert(projeto.getId());
-        e.setRealizado(true);
-        System.out.println("salvou a atarefa: "+e.getId());
         e.update();
-        System.out.println(".... ::: "+e.getRealizado());
         projeto = projetoCore.convert();
         projeto.update();
         refresh();

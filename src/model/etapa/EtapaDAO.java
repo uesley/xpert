@@ -49,17 +49,17 @@ public class EtapaDAO implements IDAO<Etapa> {
     @Override
     public void update() {
         ArrayList<String> fields = new ArrayList();
-        int r =  etapa.getRealizado() ? 1 : 0;
         fields.add("nome");
         fields.add("descricao");
         fields.add("duracao_prevista");
         fields.add("duracao_real");
-        fields.add("realizado");
+        fields.add("disponibilidade");
         fields.add("folga");
+        fields.add("realizado");
         fields.add("projeto");
         fields.add("profundidade");
         fields.add("menor_tempo_inicio");
-        fields.add("maior_tempo_fim");///@Todo arrumar isto
+        fields.add("menor_tempo_fim");///@Todo arrumar isto
 
         ArrayList<String> values = new ArrayList<>();
         values.add(etapa.getNome());
@@ -67,15 +67,12 @@ public class EtapaDAO implements IDAO<Etapa> {
         values.add(Integer.toString(etapa.getDuracao_prevista()));
         values.add(Integer.toString(etapa.getDuracao_real()));
         values.add(Integer.toString(etapa.getDisponibilidade() ? 1 : 0));
+        values.add(Integer.toString( etapa.getRealizado() ? 1 : 0));
         values.add(Integer.toString(etapa.getFolga()));
         values.add(Integer.toString(etapa.getProjeto()));
         values.add(Integer.toString(etapa.getProfundidade()));
         values.add(Integer.toString(etapa.getMenorTempoInicio()));
         values.add(Integer.toString(etapa.getMenorTempoFim()));
-        if (r != 0){
-            fields.add("disponibilidade");
-            values.add(Integer.toString(r));
-        }
 
         database.update(
                 table,
