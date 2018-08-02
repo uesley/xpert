@@ -32,7 +32,6 @@ public class EtapaDAO implements IDAO<Etapa> {
         fields.add("descricao");
         fields.add("duracao_prevista");
         fields.add("projeto");
-        fields.add("realizado");
 
         ArrayList<String> values = new ArrayList<>();
         values.add(etapa.getNome());
@@ -43,11 +42,12 @@ public class EtapaDAO implements IDAO<Etapa> {
                 table,
                 fields.toArray(new String[0]),
                 values.toArray(new String[0]));
-        etapa.setId(Integer.parseInt(database.query("select max(id) from etapas").get(0).get(0)));
+        etapa.setId(Integer.parseInt(database.query("select max(id) from "+table).get(0).get(0)));
     }
 
     @Override
     public void update() {
+        System.out.println("Atualizando etapa id: "+etapa.getId()+"  realizado? "+etapa.getRealizado());
         ArrayList<String> fields = new ArrayList();
         fields.add("nome");
         fields.add("descricao");
@@ -79,7 +79,7 @@ public class EtapaDAO implements IDAO<Etapa> {
                 etapa.getId(),
                 fields.toArray(new String[0]),
                 values.toArray(new String[0]));
-        System.out.println("QUERY: "+database.getLastQuery());
+//        System.out.println("QUERY: "+database.getLastQuery());
     }
 
     @Override
