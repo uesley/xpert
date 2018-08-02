@@ -191,7 +191,7 @@ public class EtapaCore {
         }
         public int getTempoRealDeInicioEtapa()
         {
-            if(!isDisponivel())
+            if(isDisponivel())
             {
                 int tempo=0;
 
